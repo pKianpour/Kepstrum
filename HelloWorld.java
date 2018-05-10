@@ -306,7 +306,7 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		root.getChildren().add(btnDescription);
 		
 		txtDescription = new TextField();
-		txtDescription.setPrefWidth(270);
+		txtDescription.setPrefWidth(260);
 		txtDescription.setText("1234567890");
 		txtDescription.setAlignment(Pos.BASELINE_LEFT);
 		txtDescription.setLayoutX(fieldWidthAlignment*4);
