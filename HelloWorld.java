@@ -98,42 +98,96 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		btnAddaField.setOnAction(this);
 		btnAddaField.setLayoutX(fieldWidthAlignment);
 		btnAddaField.setLayoutY(proportionalHeight *1.5);
-		btnAddaField.setStyle("-fx-background-color: #FFDAB9");
+		btnAddaField.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnAddaField);
 		
 		btnRevision = new Button();
 		btnRevision.setText("Revision");
 		btnRevision.setLayoutX(fieldWidthAlignment);
 		btnRevision.setLayoutY(proportionalHeight *2);
-		btnRevision.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnRevision.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnRevision);
 		
 		btnDate = new Button();
 		btnDate.setText("Date");
 		btnDate.setLayoutX(fieldWidthAlignment*2);
 		btnDate.setLayoutY(proportionalHeight *2);
-		btnDate.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnDate.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnDate);
 		
 		btnInitial = new Button();
 		btnInitial.setText("Initial");
 		btnInitial.setLayoutX(fieldWidthAlignment*3);
 		btnInitial.setLayoutY(proportionalHeight *2);
-		btnInitial.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnInitial.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnInitial);
 		
 		btnDescription = new Button();
 		btnDescription.setText("Description");
 		btnDescription.setLayoutX(fieldWidthAlignment*4);
 		btnDescription.setLayoutY(proportionalHeight *2);
-		btnDescription.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnDescription.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnDescription);
 		
 		btnCode = new Button();
 		btnCode.setText("Code");
 		btnCode.setLayoutX(fieldWidthAlignment*6);
 		btnCode.setLayoutY(proportionalHeight *2);
-		btnCode.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnCode.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnCode);
 		
 
@@ -144,70 +198,160 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		btnDraft.setText("Draft");
 		btnDraft.setLayoutX(fieldWidthAlignment*7);
 		btnDraft.setLayoutY(proportionalHeight *2);
-		btnDraft.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnDraft.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnDraft);
 		
 		btnFinal = new Button();
 		btnFinal.setText("Final");
 		btnFinal.setLayoutX(fieldWidthAlignment*8);
 		btnFinal.setLayoutY(proportionalHeight *2);
-		btnFinal.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnFinal.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnFinal);
 		
 		btnRelease = new Button();
 		btnRelease.setText("Release");
 		btnRelease.setLayoutX(fieldWidthAlignment*9);
 		btnRelease.setLayoutY(proportionalHeight *2);
-		btnRelease.setStyle("-fx-background-color: #f49541; -fx-border-style:solid");
+		btnRelease.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#f49541, #f49541),\r\n" + 
+				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" +
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnRelease);
 		
 		btnPrint = new Button();
 		btnPrint.setText("Print");
 		btnPrint.setLayoutX(120);
 		btnPrint.setLayoutY(screenHeight-75);
-		btnPrint.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnPrint.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnPrint);
 		
 		btnDNAPlot = new Button();
 		btnDNAPlot.setText("DNA Plot");
-		btnDNAPlot.setLayoutX(210);
+		btnDNAPlot.setLayoutX(220);
 		btnDNAPlot.setLayoutY(screenHeight-75);
-		btnDNAPlot.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnDNAPlot.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnDNAPlot);
 		
 		btnHelp = new Button();
 		btnHelp.setText("Help");
 		btnHelp.setLayoutX(screenWidth-180);
 		btnHelp.setLayoutY(screenHeight-75);
-		btnHelp.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnHelp.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnHelp);
 		
 		btnAdd1 = new Button();
 		btnAdd1.setText("1");
 		btnAdd1.setLayoutX(64);
 		btnAdd1.setLayoutY(proportionalHeight+4);
-		btnAdd1.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnAdd1.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnAdd1);
 		
 		btnAdd2 = new Button();
 		btnAdd2.setText("+");
-		btnAdd2.setLayoutX(90);
+		btnAdd2.setLayoutX(94);
 		btnAdd2.setLayoutY(proportionalHeight+4);
-		btnAdd2.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnAdd2.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnAdd2);
 		
 		btnSaveDraft = new Button();
 		btnSaveDraft.setText("Save as Draft");
 		btnSaveDraft.setLayoutX(fieldWidthAlignment*7);
 		btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
-		btnSaveDraft.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnSaveDraft);
 		
 		btnSaveRelease = new Button();
 		btnSaveRelease.setText("Save & Release");
 		btnSaveRelease.setLayoutX(fieldWidthAlignment*8);
 		btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
-		btnSaveRelease.setStyle("-fx-background-color: #FFDAB9; -fx-border-style:solid");
+		btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-text-fill: black;\r\n" + 
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnSaveRelease);
 		
 		btnConfirm = new Button();
@@ -215,13 +359,15 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		btnConfirm.setLayoutX(fieldWidthAlignment*9);
 		btnConfirm.setLayoutY(proportionalHeight*numberOfFields);
 		btnConfirm.setStyle(" -fx-background-color: \r\n" + 
-				"        linear-gradient(#f2f2f2, #d6d6d6),\r\n" + 
-				"        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),\r\n" + 
-				"        linear-gradient(#dddddd 0%, #f6f6f6 50%);\r\n" + 
-				"    -fx-background-radius: 8,7,6;\r\n" + 
+				"        #000000,\r\n" + 
+				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
+				"    -fx-background-radius: 3,2,1;\r\n" + 
+				"    -fx-padding: 3 10 3 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
-				"    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
+				"    -fx-font-size: 12px; \r\n" + 
+				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnConfirm);
 		
 		stage.setScene(scene);
@@ -239,6 +385,9 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btnAddaField) {
 			System.out.println("Add a field button was clicked :)");
+		}
+		if(event.getSource() == btnHelp) {
+			System.out.println("Display new help menu with exit button");
 		}
 	}
 
