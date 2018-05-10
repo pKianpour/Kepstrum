@@ -99,7 +99,7 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		line6.setStroke(Color.BLACK);
 		root.getChildren().add(line6);
 		
-		int fieldWidthAlignment = screenWidth/10;
+		double fieldWidthAlignment = screenWidth/10.5;
 		
 		btnAddaField = new Button();
 		btnAddaField.setText("Add a Field");
@@ -117,7 +117,103 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		btnAddaField.setOnAction(e -> {
-			numberOfFields += 0.25;
+			if (numberOfFields < 8.5) {
+				numberOfFields += 0.4;
+				
+				btnSaveDraft = new Button();
+				btnSaveDraft.setText("Save as Draft");
+				btnSaveDraft.setLayoutX(fieldWidthAlignment*7);
+				btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
+				btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
+						"        #000000,\r\n" + 
+						"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+						"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+						"    -fx-background-insets: 0,1,2;\r\n" + 
+						"    -fx-background-radius: 3,2,1;\r\n" + 
+						"    -fx-padding: 3 10 3 10;\r\n" + 
+						"    -fx-text-fill: black;\r\n" + 
+						"    -fx-font-size: 12px; \r\n" + 
+						"    -fx-font-weight: bold;");
+				root.getChildren().add(btnSaveDraft);
+				
+				btnSaveRelease = new Button();
+				btnSaveRelease.setText("Save & Release");
+				btnSaveRelease.setLayoutX(fieldWidthAlignment*8);
+				btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
+				btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
+						"        #000000,\r\n" + 
+						"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+						"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+						"    -fx-background-insets: 0,1,2;\r\n" + 
+						"    -fx-background-radius: 3,2,1;\r\n" + 
+						"    -fx-padding: 3 10 3 10;\r\n" + 
+						"    -fx-text-fill: black;\r\n" + 
+						"    -fx-font-size: 12px; \r\n" + 
+						"    -fx-font-weight: bold;");
+				root.getChildren().add(btnSaveRelease);
+				
+				btnConfirm = new Button();
+				btnConfirm.setText("Confirm");
+				btnConfirm.setLayoutX(fieldWidthAlignment*9);
+				btnConfirm.setLayoutY(proportionalHeight*numberOfFields);
+				btnConfirm.setStyle(" -fx-background-color: \r\n" + 
+						"        #000000,\r\n" + 
+						"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+						"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+						"    -fx-background-insets: 0,1,2;\r\n" + 
+						"    -fx-background-radius: 3,2,1;\r\n" + 
+						"    -fx-padding: 3 10 3 10;\r\n" + 
+						"    -fx-text-fill: black;\r\n" + 
+						"    -fx-font-size: 12px; \r\n" + 
+						"    -fx-font-weight: bold;");
+				root.getChildren().add(btnConfirm);
+				
+				txtRevision = new TextField();
+				txtRevision.setPrefWidth(100);
+				txtRevision.setText("1234567890");
+				txtRevision.setAlignment(Pos.CENTER);
+				txtRevision.setLayoutX(fieldWidthAlignment);
+				txtRevision.setLayoutY(proportionalHeight*numberOfFields);
+				txtRevision.setStyle("-fx-background-color: #d4ffd4;");
+				root.getChildren().add(txtRevision);
+				
+				txtDate = new TextField();
+				txtDate.setPrefWidth(90);
+				txtDate.setText("yy/mm/dd");
+				txtDate.setAlignment(Pos.CENTER);
+				txtDate.setLayoutX(fieldWidthAlignment*2);
+				txtDate.setLayoutY(proportionalHeight*numberOfFields);
+				txtDate.setStyle("-fx-background-color: #d4ffd4;");
+				root.getChildren().add(txtDate);
+				
+				txtInitial = new TextField();
+				txtInitial.setPrefWidth(100);
+				txtInitial.setText("1234567890");
+				txtInitial.setAlignment(Pos.CENTER);
+				txtInitial.setLayoutX(fieldWidthAlignment*3);
+				txtInitial.setLayoutY(proportionalHeight*numberOfFields);
+				txtInitial.setStyle("-fx-background-color: #d4ffd4;");
+				root.getChildren().add(txtInitial);
+				
+				txtDescription = new TextField();
+				txtDescription.setPrefWidth(260);
+				txtDescription.setText("1234567890");
+				txtDescription.setAlignment(Pos.BASELINE_LEFT);
+				txtDescription.setLayoutX(fieldWidthAlignment*4);
+				txtDescription.setLayoutY(proportionalHeight*numberOfFields);
+				txtDescription.setStyle("-fx-background-color: #d4ffd4;");
+				root.getChildren().add(txtDescription);
+				
+				txtCode = new TextField();
+				txtCode.setPrefWidth(100);
+				txtCode.setText("1234567890");
+				txtCode.setAlignment(Pos.CENTER);
+				txtCode.setLayoutX(fieldWidthAlignment*6);
+				txtCode.setLayoutY(proportionalHeight*numberOfFields);
+				txtCode.setStyle("-fx-background-color: #d4ffd4;");
+				root.getChildren().add(txtCode);
+			}
+			
 		});
 		root.getChildren().add(btnAddaField);
 		
@@ -409,7 +505,7 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		root.getChildren().add(txtInitial);
 		
 		txtDescription = new TextField();
-		txtDescription.setPrefWidth(270);
+		txtDescription.setPrefWidth(260);
 		txtDescription.setText("1234567890");
 		txtDescription.setAlignment(Pos.BASELINE_LEFT);
 		txtDescription.setLayoutX(fieldWidthAlignment*4);
