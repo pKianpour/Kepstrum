@@ -2,6 +2,7 @@
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 
@@ -12,6 +13,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
 /** 
@@ -38,6 +40,12 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 	Button btnSaveDraft;
 	Button btnSaveRelease;
 	Button btnConfirm;
+	
+	TextField txtRevision;
+	TextField txtDate;
+	TextField txtInitial;
+	TextField txtDescription;
+	TextField txtCode;
 	
 	public double numberOfFields = 2.5;
 	
@@ -108,6 +116,9 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		btnAddaField.setOnAction(e -> {
+			numberOfFields += 0.25;
+		});
 		root.getChildren().add(btnAddaField);
 		
 		btnRevision = new Button();
@@ -369,6 +380,51 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnConfirm);
+		
+		txtRevision = new TextField();
+		txtRevision.setPrefWidth(100);
+		txtRevision.setText("1234567890");
+		txtRevision.setAlignment(Pos.CENTER);
+		txtRevision.setLayoutX(fieldWidthAlignment);
+		txtRevision.setLayoutY(proportionalHeight*2.5);
+		txtRevision.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtRevision);
+		
+		txtDate = new TextField();
+		txtDate.setPrefWidth(90);
+		txtDate.setText("yy/mm/dd");
+		txtDate.setAlignment(Pos.CENTER);
+		txtDate.setLayoutX(fieldWidthAlignment*2);
+		txtDate.setLayoutY(proportionalHeight*2.5);
+		txtDate.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtDate);
+		
+		txtInitial = new TextField();
+		txtInitial.setPrefWidth(100);
+		txtInitial.setText("1234567890");
+		txtInitial.setAlignment(Pos.CENTER);
+		txtInitial.setLayoutX(fieldWidthAlignment*3);
+		txtInitial.setLayoutY(proportionalHeight*2.5);
+		txtInitial.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtInitial);
+		
+		txtDescription = new TextField();
+		txtDescription.setPrefWidth(270);
+		txtDescription.setText("1234567890");
+		txtDescription.setAlignment(Pos.BASELINE_LEFT);
+		txtDescription.setLayoutX(fieldWidthAlignment*4);
+		txtDescription.setLayoutY(proportionalHeight*2.5);
+		txtDescription.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtDescription);
+		
+		txtCode = new TextField();
+		txtCode.setPrefWidth(100);
+		txtCode.setText("1234567890");
+		txtCode.setAlignment(Pos.CENTER);
+		txtCode.setLayoutX(fieldWidthAlignment*6);
+		txtCode.setLayoutY(proportionalHeight*2.5);
+		txtCode.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtCode);
 		
 		stage.setScene(scene);
 		stage.show();
