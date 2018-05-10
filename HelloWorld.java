@@ -11,9 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 
 /** 
@@ -22,7 +21,7 @@ import javafx.event.ActionEvent;
  *
  */
 public class HelloWorld extends Application implements  EventHandler<ActionEvent>{
-	
+	/**  fix buttons tomorrow using hover and CSS import*/
 	Button btnAddaField;
 	Button btnRevision;
 	Button btnDate;
@@ -99,7 +98,7 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		line6.setStroke(Color.BLACK);
 		root.getChildren().add(line6);
 		
-		double fieldWidthAlignment = screenWidth/10.5;
+		int fieldWidthAlignment = screenWidth/10;
 		
 		btnAddaField = new Button();
 		btnAddaField.setText("Add a Field");
@@ -110,12 +109,16 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+				
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
 				"    -fx-padding: 3 10 3 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
-				"    -fx-font-weight: bold;");
+				"    -fx-font-weight: bold; \r\n");
+		
+		root.getChildren().add(btnAddaField);
+		
 		btnAddaField.setOnAction(e -> {
 			if (numberOfFields < 8.5) {
 				numberOfFields += 0.4;
@@ -215,14 +218,11 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 			}
 			
 		});
-		root.getChildren().add(btnAddaField);
-		
 		btnRevision = new Button();
 		btnRevision.setText("Revision");
 		btnRevision.setLayoutX(fieldWidthAlignment);
 		btnRevision.setLayoutY(proportionalHeight *2);
-		btnRevision.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
+		btnRevision.setStyle(" -fx-background-color: \r\n" +  
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -233,12 +233,20 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnRevision);
 		
+		txtRevision = new TextField();
+		txtRevision.setPrefWidth(100);
+		txtRevision.setText("1234567890");
+		txtRevision.setAlignment(Pos.CENTER);
+		txtRevision.setLayoutX(fieldWidthAlignment);
+		txtRevision.setLayoutY(proportionalHeight*2.5);
+		txtRevision.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtRevision);
+		
 		btnDate = new Button();
 		btnDate.setText("Date");
 		btnDate.setLayoutX(fieldWidthAlignment*2);
 		btnDate.setLayoutY(proportionalHeight *2);
 		btnDate.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -249,12 +257,20 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnDate);
 		
+		txtDate = new TextField();
+		txtDate.setPrefWidth(90);
+		txtDate.setText("yy/mm/dd");
+		txtDate.setAlignment(Pos.CENTER);
+		txtDate.setLayoutX(fieldWidthAlignment*2);
+		txtDate.setLayoutY(proportionalHeight*2.5);
+		txtDate.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtDate);
+		
 		btnInitial = new Button();
 		btnInitial.setText("Initial");
 		btnInitial.setLayoutX(fieldWidthAlignment*3);
 		btnInitial.setLayoutY(proportionalHeight *2);
 		btnInitial.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -265,12 +281,20 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnInitial);
 		
+		txtInitial = new TextField();
+		txtInitial.setPrefWidth(100);
+		txtInitial.setText("1234567890");
+		txtInitial.setAlignment(Pos.CENTER);
+		txtInitial.setLayoutX(fieldWidthAlignment*3);
+		txtInitial.setLayoutY(proportionalHeight*2.5);
+		txtInitial.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtInitial);
+		
 		btnDescription = new Button();
 		btnDescription.setText("Description");
 		btnDescription.setLayoutX(fieldWidthAlignment*4);
 		btnDescription.setLayoutY(proportionalHeight *2);
 		btnDescription.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -281,12 +305,20 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnDescription);
 		
+		txtDescription = new TextField();
+		txtDescription.setPrefWidth(270);
+		txtDescription.setText("1234567890");
+		txtDescription.setAlignment(Pos.BASELINE_LEFT);
+		txtDescription.setLayoutX(fieldWidthAlignment*4);
+		txtDescription.setLayoutY(proportionalHeight*2.5);
+		txtDescription.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtDescription);
+		
 		btnCode = new Button();
 		btnCode.setText("Code");
 		btnCode.setLayoutX(fieldWidthAlignment*6);
 		btnCode.setLayoutY(proportionalHeight *2);
 		btnCode.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -297,16 +329,21 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnCode);
 		
+		txtCode = new TextField();
+		txtCode.setPrefWidth(100);
+		txtCode.setText("1234567890");
+		txtCode.setAlignment(Pos.CENTER);
+		txtCode.setLayoutX(fieldWidthAlignment*6);
+		txtCode.setLayoutY(proportionalHeight*2.5);
+		txtCode.setStyle("-fx-background-color: #d4ffd4;");
+		root.getChildren().add(txtCode);
 
-		
-		
 		
 		btnDraft = new Button();
 		btnDraft.setText("Draft");
 		btnDraft.setLayoutX(fieldWidthAlignment*7);
 		btnDraft.setLayoutY(proportionalHeight *2);
 		btnDraft.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -322,7 +359,6 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		btnFinal.setLayoutX(fieldWidthAlignment*8);
 		btnFinal.setLayoutY(proportionalHeight *2);
 		btnFinal.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -337,8 +373,7 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 		btnRelease.setText("Release");
 		btnRelease.setLayoutX(fieldWidthAlignment*9);
 		btnRelease.setLayoutY(proportionalHeight *2);
-		btnRelease.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
+		btnRelease.setStyle(" -fx-background-color: \r\n" +  
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
@@ -476,51 +511,6 @@ public class HelloWorld extends Application implements  EventHandler<ActionEvent
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		root.getChildren().add(btnConfirm);
-		
-		txtRevision = new TextField();
-		txtRevision.setPrefWidth(100);
-		txtRevision.setText("1234567890");
-		txtRevision.setAlignment(Pos.CENTER);
-		txtRevision.setLayoutX(fieldWidthAlignment);
-		txtRevision.setLayoutY(proportionalHeight*2.5);
-		txtRevision.setStyle("-fx-background-color: #d4ffd4;");
-		root.getChildren().add(txtRevision);
-		
-		txtDate = new TextField();
-		txtDate.setPrefWidth(90);
-		txtDate.setText("yy/mm/dd");
-		txtDate.setAlignment(Pos.CENTER);
-		txtDate.setLayoutX(fieldWidthAlignment*2);
-		txtDate.setLayoutY(proportionalHeight*2.5);
-		txtDate.setStyle("-fx-background-color: #d4ffd4;");
-		root.getChildren().add(txtDate);
-		
-		txtInitial = new TextField();
-		txtInitial.setPrefWidth(100);
-		txtInitial.setText("1234567890");
-		txtInitial.setAlignment(Pos.CENTER);
-		txtInitial.setLayoutX(fieldWidthAlignment*3);
-		txtInitial.setLayoutY(proportionalHeight*2.5);
-		txtInitial.setStyle("-fx-background-color: #d4ffd4;");
-		root.getChildren().add(txtInitial);
-		
-		txtDescription = new TextField();
-		txtDescription.setPrefWidth(260);
-		txtDescription.setText("1234567890");
-		txtDescription.setAlignment(Pos.BASELINE_LEFT);
-		txtDescription.setLayoutX(fieldWidthAlignment*4);
-		txtDescription.setLayoutY(proportionalHeight*2.5);
-		txtDescription.setStyle("-fx-background-color: #d4ffd4;");
-		root.getChildren().add(txtDescription);
-		
-		txtCode = new TextField();
-		txtCode.setPrefWidth(100);
-		txtCode.setText("1234567890");
-		txtCode.setAlignment(Pos.CENTER);
-		txtCode.setLayoutX(fieldWidthAlignment*6);
-		txtCode.setLayoutY(proportionalHeight*2.5);
-		txtCode.setStyle("-fx-background-color: #d4ffd4;");
-		root.getChildren().add(txtCode);
 		
 		stage.setScene(scene);
 		stage.show();
