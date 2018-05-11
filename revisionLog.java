@@ -12,6 +12,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.event.ActionEvent;
@@ -24,7 +26,6 @@ import javafx.event.ActionEvent;
 public class revisionLog extends Application implements  EventHandler<ActionEvent>{
 	/**  fix buttons tomorrow using hover and CSS import*/
 	
-
 	Button btnAddaField;
 	Button btnRevision;
 	Button btnDate;
@@ -57,7 +58,6 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 	public static void main(String[] args) {
 		/** launches are javaFx */
 		launch(args);
-		
 	}
 
 	/**
@@ -125,7 +125,21 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold; \r\n");
-
+		
+		DropShadow shadowDrop = new DropShadow();
+		// Adding the shadow when the mouse cursor is on
+		btnAddaField.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnAddaField.setEffect(shadowDrop);
+			}
+		});
+		//Removing the shadow when the mouse cursor is off
+		btnAddaField.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnAddaField.setEffect(null);
+			}
+		});
+		
 		btnAddaField.setOnAction(e -> {
 			if (numberOfFields < 8.5) {
 				numberOfFields += 0.4;
@@ -180,7 +194,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				
 				txtRevision = new TextField();
 				txtRevision.setPrefWidth(100);
-				txtRevision.setText("1234567890");
+				txtRevision.setPromptText("1234567890");
 				txtRevision.setAlignment(Pos.CENTER);
 				txtRevision.setLayoutX(fieldWidthAlignment);
 				txtRevision.setLayoutY(proportionalHeight*numberOfFields);
@@ -189,7 +203,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				
 				txtDate = new TextField();
 				txtDate.setPrefWidth(90);
-				txtDate.setText("yy/mm/dd");
+				txtDate.setPromptText("yy/mm/dd");
 				txtDate.setAlignment(Pos.CENTER);
 				txtDate.setLayoutX(fieldWidthAlignment*2);
 				txtDate.setLayoutY(proportionalHeight*numberOfFields);
@@ -198,7 +212,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				
 				txtInitial = new TextField();
 				txtInitial.setPrefWidth(100);
-				txtInitial.setText("1234567890");
+				txtInitial.setPromptText("1234567890");
 				txtInitial.setAlignment(Pos.CENTER);
 				txtInitial.setLayoutX(fieldWidthAlignment*3);
 				txtInitial.setLayoutY(proportionalHeight*numberOfFields);
@@ -207,7 +221,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				
 				txtDescription = new TextField();
 				txtDescription.setPrefWidth(260);
-				txtDescription.setText("1234567890");
+				txtDescription.setPromptText("1234567890123456789012345678901234567890");
 				txtDescription.setAlignment(Pos.BASELINE_LEFT);
 				txtDescription.setLayoutX(fieldWidthAlignment*4);
 				txtDescription.setLayoutY(proportionalHeight*numberOfFields);
@@ -216,7 +230,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				
 				txtCode = new TextField();
 				txtCode.setPrefWidth(100);
-				txtCode.setText("1234567890");
+				txtCode.setPromptText("1234567890");
 				txtCode.setAlignment(Pos.CENTER);
 				txtCode.setLayoutX(fieldWidthAlignment*6);
 				txtCode.setLayoutY(proportionalHeight*numberOfFields);
@@ -249,7 +263,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		
 		txtRevision = new TextField();
 		txtRevision.setPrefWidth(100);
-		txtRevision.setText("1234567890");
+		txtRevision.setPromptText("1234567890");
 		txtRevision.setAlignment(Pos.CENTER);
 		txtRevision.setLayoutX(fieldWidthAlignment);
 		txtRevision.setLayoutY(proportionalHeight*2.5);
@@ -271,7 +285,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		
 		txtDate = new TextField();
 		txtDate.setPrefWidth(90);
-		txtDate.setText("yy/mm/dd");
+		txtDate.setPromptText("yy/mm/dd");
 		txtDate.setAlignment(Pos.CENTER);
 		txtDate.setLayoutX(fieldWidthAlignment*2);
 		txtDate.setLayoutY(proportionalHeight*2.5);
@@ -293,7 +307,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		
 		txtInitial = new TextField();
 		txtInitial.setPrefWidth(100);
-		txtInitial.setText("1234567890");
+		txtInitial.setPromptText("1234567890");
 		txtInitial.setAlignment(Pos.CENTER);
 		txtInitial.setLayoutX(fieldWidthAlignment*3);
 		txtInitial.setLayoutY(proportionalHeight*2.5);
@@ -315,7 +329,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		
 		txtDescription = new TextField();
 		txtDescription.setPrefWidth(260);
-		txtDescription.setText("1234567890");
+		txtDescription.setPromptText("1234567890123456789012345678901234567890");
 		txtDescription.setAlignment(Pos.BASELINE_LEFT);
 		txtDescription.setLayoutX(fieldWidthAlignment*4);
 		txtDescription.setLayoutY(proportionalHeight*2.5);
@@ -337,7 +351,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		
 		txtCode = new TextField();
 		txtCode.setPrefWidth(100);
-		txtCode.setText("1234567890");
+		txtCode.setPromptText("1234567890");
 		txtCode.setAlignment(Pos.CENTER);
 		txtCode.setLayoutX(fieldWidthAlignment*6);
 		txtCode.setLayoutY(proportionalHeight*2.5);
@@ -399,6 +413,19 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		DropShadow shadowPrint = new DropShadow();
+		// Adding the shadow when the mouse cursor is on
+		btnPrint.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnPrint.setEffect(shadowPrint);
+			}
+		});
+		//Removing the shadow when the mouse cursor is off
+		btnPrint.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnPrint.setEffect(null);
+			}
+		});
 		
 		btnDNAPlot = new Button();
 		btnDNAPlot.setText("DNA Plot");
@@ -414,7 +441,19 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		DropShadow shadowDNAPlot = new DropShadow();
+		// Adding the shadow when the mouse cursor is on
+		btnDNAPlot.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnDNAPlot.setEffect(shadowDNAPlot);
+			}
+		});
+		//Removing the shadow when the mouse cursor is off
+		btnDNAPlot.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnDNAPlot.setEffect(null);
+			}
+		});
 		btnHelp = new Button();
 		btnHelp.setText("Help");
 		btnHelp.setLayoutX(screenWidth-180);
@@ -429,6 +468,19 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		DropShadow shadowHelp = new DropShadow();
+		// Adding the shadow when the mouse cursor is on
+		btnHelp.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnHelp.setEffect(shadowHelp);
+			}
+		});
+		//Removing the shadow when the mouse cursor is off
+		btnHelp.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				btnHelp.setEffect(null);
+			}
+		});
 		btnHelp.setOnAction(e -> Help.help());
 		
 		btnSaveDraft = new Button();
@@ -484,7 +536,6 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		stage.setScene(scene);
 		stage.setTitle("Revision Log");
 		
-		scene.getStylesheets().add("myStyle.css");
 		stage.setScene(scene);
 		stage.show();
 
