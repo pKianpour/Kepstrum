@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.scene.layout.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
@@ -53,7 +54,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 	ChoiceBox<Integer> pageNum;
 	
 	public double numberOfFields = 2.5;
-	
+	static Group group;
 	
 	public static void main(String[] args) {
 		/** launches are javaFx */
@@ -67,6 +68,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 	public void start(Stage stage) throws Exception {
 
 		Group root = new Group();
+		group = root;
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		
 		int screenWidth=(int) primaryScreenBounds.getWidth();
@@ -426,6 +428,8 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				btnPrint.setEffect(null);
 			}
 		});
+		btnPrint.setOnAction(e -> Print.start());
+		
 		
 		btnDNAPlot = new Button();
 		btnDNAPlot.setText("DNA Plot");
@@ -545,6 +549,11 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		stage.setHeight(primaryScreenBounds.getHeight());
 		
 	}
+	
+	public static Group currentLayout() {
+		return group;
+	}
+	
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btnAddaField) {
