@@ -1,5 +1,4 @@
 
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -12,7 +11,9 @@ import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.event.ActionEvent;
 
 /** 
@@ -22,6 +23,7 @@ import javafx.event.ActionEvent;
  */
 public class revisionLog extends Application implements  EventHandler<ActionEvent>{
 	/**  fix buttons tomorrow using hover and CSS import*/
+	
 
 	Button btnAddaField;
 	Button btnRevision;
@@ -46,6 +48,8 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 	TextField txtInitial;
 	TextField txtDescription;
 	TextField txtCode;
+	
+	ChoiceBox<Integer> pageNum;
 	
 	public double numberOfFields = 2.5;
 	
@@ -97,6 +101,13 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		root.getChildren().add(line6);
 		
 		int fieldWidthAlignment = screenWidth/10;
+		
+		pageNum = new ChoiceBox<>();
+		pageNum.getItems().add(1);
+		pageNum.setValue(1);
+		pageNum.setTooltip(new Tooltip("Select a page"));
+		pageNum.setLayoutX(fieldWidthAlignment * 0.5);
+		pageNum.setLayoutY(proportionalHeight * 1.5);
 		
 		btnAddaField = new Button();
 		btnAddaField.setText("Add a Field");
@@ -211,6 +222,14 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				txtCode.setLayoutY(proportionalHeight*numberOfFields);
 				txtCode.setStyle("-fx-background-color: #d4ffd4;");
 				root.getChildren().add(txtCode);
+			}
+			else if(numberOfFields > 8.5) {
+				Group root2 = new Group();
+				root2.getChildren().addAll(btnRevision, pageNum);
+				Scene page2 = new Scene(root2, screenWidth, screenHeight, Color.WHITE);
+				pageNum.getItems().add(2);
+				pageNum.setValue(2);
+				stage.setScene(page2);
 			}
 			
 		});
@@ -410,6 +429,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		btnHelp.setOnAction(e -> Help.help());
 		
 		btnSaveDraft = new Button();
 		btnSaveDraft.setText("Save as Draft");
@@ -456,7 +476,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");	
 		
-		root.getChildren().addAll(btnAddaField,btnRevision,btnDate, btnInitial,btnDescription, btnCode, 
+		root.getChildren().addAll(pageNum, btnAddaField,btnRevision,btnDate, btnInitial,btnDescription, btnCode, 
 				btnDraft,btnFinal, btnRelease, btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,
 				btnSaveRelease,btnConfirm,txtRevision,txtDate,txtInitial,txtDescription, txtCode);
 		
