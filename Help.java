@@ -28,8 +28,7 @@ public class Help {
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
-		Label lblRevisionDef = new Label();
-		lblRevisionDef.setText("Revision number of test.");
+		Label lblRevisionDef = new Label("Revision number of test.");
 		
 		Label lblDate = new Label();
 		lblDate.setText("Date");
@@ -45,8 +44,7 @@ public class Help {
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
-		Label lblDateDef = new Label();
-		lblDateDef.setText("The date the test took place.");
+		Label lblDateDef = new Label("The date the test took place.");
 		
 		Label lblInitial = new Label();
 		lblInitial.setText("Initial");
@@ -62,8 +60,7 @@ public class Help {
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
-		Label lblInitialDef = new Label();
-		lblInitialDef.setText("Initial definition???");
+		Label lblInitialDef = new Label("Initial definition???");
 		
 		Label lblDescription = new Label();
 		lblDescription.setText("Description");
@@ -79,8 +76,7 @@ public class Help {
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
-	//	Label lblDescription = new Label();
-		
+		Label lblDescriptionDef = new Label("A brief description of the associated revision.");
 		
 		Label lblCode = new Label();
 		lblCode.setText("Code");
@@ -96,18 +92,20 @@ public class Help {
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
+		Label lblCodeDef = new Label("The code for the revision.");
+		
 		BorderPane layout = new BorderPane();
 		
 		VBox words = new VBox();
 		words.setPadding(new Insets(10));
 		words.setSpacing(10);
-		words.getChildren().addAll(lblRevision, lblDate, lblInitial, lblDescription);
+		words.getChildren().addAll(lblRevision, lblDate, lblInitial, lblDescription, lblCode);
 		layout.setLeft(words);
 		
 		VBox definitions = new VBox();
-		definitions.setPadding(new Insets(10));
-		definitions.setSpacing(10);
-		definitions.getChildren().addAll(lblRevisionDef);
+		definitions.setPadding(new Insets(12));
+		definitions.setSpacing(14);
+		definitions.getChildren().addAll(lblRevisionDef, lblDateDef, lblInitialDef, lblDescriptionDef, lblCodeDef);
 		layout.setCenter(definitions);
 		
 		//layout.getChildren().addAll(lblRevision);

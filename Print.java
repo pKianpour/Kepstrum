@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class Print {
 	
@@ -39,6 +40,15 @@ public class Print {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold; \r\n");
+		
+		Button printSceneButton = new Button("Page Setup and Print");
+		printSceneButton.setOnAction(e -> pageSetup(revisionLog.currentLayout()));
+		
+		// Create the Status Box
+				HBox jobStatusBox = new HBox(5, new Label("Job Status: "), jobStatus);
+				// Create the Button Box
+				HBox buttonBox = new HBox(5, printSceneButton);
+		
 		DropShadow shadowDrop = new DropShadow();
 		// Adding the shadow when the mouse cursor is on
 		button.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -52,39 +62,6 @@ public class Print {
 				button.setEffect(null);
 			}
 		});
-		
-		
-		Button printSceneButton = new Button("Print Scene");
-		printSceneButton.setStyle(" -fx-background-color: \r\n" + 
-				"        #000000,\r\n" + 
-				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-				
-				"    -fx-background-insets: 0,1,2;\r\n" + 
-				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
-				"    -fx-text-fill: black;\r\n" + 
-				"    -fx-font-size: 12px; \r\n" + 
-				"    -fx-font-weight: bold; \r\n");
-		DropShadow shadowPrintSceneButton = new DropShadow();
-		// Adding the shadow when the mouse cursor is on
-		printSceneButton.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				printSceneButton.setEffect(shadowPrintSceneButton);
-			}
-		});
-		//Removing the shadow when the mouse cursor is off
-		printSceneButton.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				printSceneButton.setEffect(null);
-			}
-		});
-		printSceneButton.setOnAction(e -> print(revisionLog.currentLayout()));
-		
-		// Create the Status Box
-				HBox jobStatusBox = new HBox(5, new Label("Job Status: "), jobStatus);
-				// Create the Button Box
-				HBox buttonBox = new HBox(5, printSceneButton);
 
 		// Create the Event-Handlers for the Buttons
 		button.setOnAction(new EventHandler <ActionEvent>() 
@@ -132,39 +109,39 @@ public class Print {
 		stage.show();		
 	}
 	
-	private static void print(Node node) 
-	{
-		// Define the Job Status Message
-		jobStatus.textProperty().unbind();
-		jobStatus.setText("Creating a printer job...");
+	private static void pageSetup(Node node) {
 		
-		// Create a printer job for the default printer
+		//Create a printer job for the default printer
 		PrinterJob job = PrinterJob.createPrinterJob();
 		
-		if (job != null) 
-		{
-			// Show the printer job status
-			jobStatus.textProperty().bind(job.jobStatusProperty().asString());
+		if(job == null)
+			return;
+		
+		boolean proceed = job.showPageSetupDialog(null);
+		
+		if(proceed)
+			print(job, node);
+		
+	} // end pageSetup
+	
+	private static void print(PrinterJob job, Node node) 
+	{
+		// Show the printer job status
+		jobStatus.textProperty().bind(job.jobStatusProperty().asString());
 			
 			// Print the node
-			boolean printed = job.printPage(node);
+		boolean printed = job.printPage(node);
 
-			if (printed) 
-			{
-				// End the printer job
-				job.endJob();
-			} 
-			else 
-			{
-				// Write Error Message
-				jobStatus.textProperty().unbind();
-				jobStatus.setText("Printing failed.");
-			}
+		if (printed) 
+		{
+			// End the printer job
+			job.endJob();
 		} 
 		else 
 		{
 			// Write Error Message
-			jobStatus.setText("Could not create a printer job.");
+			jobStatus.textProperty().unbind();
+			jobStatus.setText("Printing failed.");
 		}
-	}
+	}// end print
 }
