@@ -10,21 +10,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.layout.*;
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.event.ActionEvent;
 
 /** 
- * 
  * extends application which is an import
- *
  */
-public class revisionLog extends Application implements  EventHandler<ActionEvent>{
+public class revisionLog extends Application{
 	/**  fix buttons tomorrow using hover and CSS import*/
 	
 	Button btnAddaField;
@@ -111,9 +108,14 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		pageNum.setLayoutX(fieldWidthAlignment * 0.5);
 		pageNum.setLayoutY(proportionalHeight * 1.5);
 		
+		/** Add a field button
+		 * Positioned proportionally
+		 * CSS setStyle of button with on Button shadow
+		 * Functionality iteratively prints out TextFields: Revision, Date, Initial, Description, code 
+		 * and Buttons Save as Draft, Save & Release, confirm
+		 */
 		btnAddaField = new Button();
 		btnAddaField.setText("Add a Field");
-		btnAddaField.setOnAction(this);
 		btnAddaField.setLayoutX(fieldWidthAlignment);
 		btnAddaField.setLayoutY(proportionalHeight *1.5);
 		btnAddaField.setStyle(" -fx-background-color: \r\n" + 
@@ -142,6 +144,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 			}
 		});
 		
+		/**
+		 * Set's functionality to Add a field button
+		 */
 		btnAddaField.setOnAction(e -> {
 			if (numberOfFields < 8.5) {
 				numberOfFields += 0.4;
@@ -239,6 +244,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				txtCode.setStyle("-fx-background-color: #d4ffd4;");
 				root.getChildren().add(txtCode);
 			}
+			/**
+			 * Determines how many fields per page
+			 */
 			else if(numberOfFields > 8.5) {
 				Group root2 = new Group();
 				root2.getChildren().addAll(btnRevision, pageNum);
@@ -249,6 +257,10 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 			}
 			
 		});
+		
+		/**
+		 * Revision disabled button label
+		 */
 		btnRevision = new Button();
 		btnRevision.setText("Revision");
 		btnRevision.setLayoutX(fieldWidthAlignment);
@@ -263,6 +275,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
+		/**
+		 * Revision textField 1
+		 */
 		txtRevision = new TextField();
 		txtRevision.setPrefWidth(100);
 		txtRevision.setPromptText("1234567890");
@@ -271,6 +286,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		txtRevision.setLayoutY(proportionalHeight*2.5);
 		txtRevision.setStyle("-fx-background-color: #d4ffd4;");
 		
+		/**
+		 * Date disabled button
+		 */
 		btnDate = new Button();
 		btnDate.setText("Date");
 		btnDate.setLayoutX(fieldWidthAlignment*2);
@@ -284,7 +302,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		/**
+		 * Date Textfield 1
+		 */
 		txtDate = new TextField();
 		txtDate.setPrefWidth(90);
 		txtDate.setPromptText("yy/mm/dd");
@@ -293,6 +313,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		txtDate.setLayoutY(proportionalHeight*2.5);
 		txtDate.setStyle("-fx-background-color: #d4ffd4;");
 		
+		/**
+		 * Initial disabled button
+		 */
 		btnInitial = new Button();
 		btnInitial.setText("Initial");
 		btnInitial.setLayoutX(fieldWidthAlignment*3);
@@ -306,7 +329,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		/**
+		 * Initial Textfield 1
+		 */
 		txtInitial = new TextField();
 		txtInitial.setPrefWidth(100);
 		txtInitial.setPromptText("1234567890");
@@ -315,6 +340,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		txtInitial.setLayoutY(proportionalHeight*2.5);
 		txtInitial.setStyle("-fx-background-color: #d4ffd4;");
 		
+		/**
+		 * Description disabled button label
+		 */
 		btnDescription = new Button();
 		btnDescription.setText("Description");
 		btnDescription.setLayoutX(fieldWidthAlignment*4);
@@ -328,7 +356,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		/**
+		 * Description Textfield 1
+		 */
 		txtDescription = new TextField();
 		txtDescription.setPrefWidth(260);
 		txtDescription.setPromptText("1234567890123456789012345678901234567890");
@@ -337,6 +367,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		txtDescription.setLayoutY(proportionalHeight*2.5);
 		txtDescription.setStyle("-fx-background-color: #d4ffd4;");
 		
+		/**
+		 * Code disabled Button
+		 */
 		btnCode = new Button();
 		btnCode.setText("Code");
 		btnCode.setLayoutX(fieldWidthAlignment*6);
@@ -350,7 +383,10 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		/**
+		 * 
+		 * Code TextField 1
+		 */
 		txtCode = new TextField();
 		txtCode.setPrefWidth(100);
 		txtCode.setPromptText("1234567890");
@@ -359,6 +395,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		txtCode.setLayoutY(proportionalHeight*2.5);
 		txtCode.setStyle("-fx-background-color: #d4ffd4;");
 		
+		/**
+		 * Draft Disabled Button
+		 */
 		btnDraft = new Button();
 		btnDraft.setText("Draft");
 		btnDraft.setLayoutX(fieldWidthAlignment*7);
@@ -373,6 +412,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
+		/**
+		 * Final Disabled Button
+		 */
 		btnFinal = new Button();
 		btnFinal.setText("Final");
 		btnFinal.setLayoutX(fieldWidthAlignment*8);
@@ -387,6 +429,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		
+		/**
+		 * Release Disabled Button
+		 */
 		btnRelease = new Button();
 		btnRelease.setText("Release");
 		btnRelease.setLayoutX(fieldWidthAlignment*9);
@@ -401,6 +446,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-font-size: 12px; \r\n" +
 				"    -fx-font-weight: bold;");
 		
+		/**
+		 * Print directs to separate print class
+		 */
 		btnPrint = new Button();
 		btnPrint.setText("Print");
 		btnPrint.setLayoutX(120);
@@ -430,7 +478,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		});
 		btnPrint.setOnAction(e -> Print.start());
 		
-		
+		/**
+		 * Directs to DNA Plot page
+		 */
 		btnDNAPlot = new Button();
 		btnDNAPlot.setText("DNA Plot");
 		btnDNAPlot.setLayoutX(220);
@@ -445,6 +495,11 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		
+		/**
+		 * For DNAPlot Button
+		 * When mouse goes over active buttons, display a shadow
+		 */
 		DropShadow shadowDNAPlot = new DropShadow();
 		// Adding the shadow when the mouse cursor is on
 		btnDNAPlot.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -452,12 +507,20 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				btnDNAPlot.setEffect(shadowDNAPlot);
 			}
 		});
+		/**
+		 * For DNAPlot Button
+		 * When mouse goes away from active button, remove shadow
+		 */
 		//Removing the shadow when the mouse cursor is off
 		btnDNAPlot.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent e) {
 				btnDNAPlot.setEffect(null);
 			}
 		});
+		/**
+		 * Help button redirects to help class which 
+		 * describes every button/field on page
+		 */
 		btnHelp = new Button();
 		btnHelp.setText("Help");
 		btnHelp.setLayoutX(screenWidth-180);
@@ -472,6 +535,11 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		
+		/**
+		 * For Help Button
+		 * Display a shadow when mouse goes over button
+		 */
 		DropShadow shadowHelp = new DropShadow();
 		// Adding the shadow when the mouse cursor is on
 		btnHelp.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -479,6 +547,11 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				btnHelp.setEffect(shadowHelp);
 			}
 		});
+		/**
+		 * For Help Button
+		 * Remove a shadow when mouse leaves button
+		 * 
+		 */
 		//Removing the shadow when the mouse cursor is off
 		btnHelp.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent e) {
@@ -487,6 +560,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		});
 		btnHelp.setOnAction(e -> Help.help());
 		
+		/**
+		 * Save as draft functional button
+		 */
 		btnSaveDraft = new Button();
 		btnSaveDraft.setText("Save as Draft");
 		btnSaveDraft.setLayoutX(fieldWidthAlignment*7);
@@ -501,7 +577,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		/**
+		 * Save & Release functional Button
+		 */
 		btnSaveRelease = new Button();
 		btnSaveRelease.setText("Save & Release");
 		btnSaveRelease.setLayoutX(fieldWidthAlignment*8);
@@ -516,7 +594,9 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
+		/**
+		 * Release functional Button
+		 */
 		btnConfirm = new Button();
 		btnConfirm.setText("Confirm");
 		btnConfirm.setLayoutX(fieldWidthAlignment*9);
@@ -531,11 +611,16 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");	
-		
+		/**
+		 * Add everything to scene
+		 */
 		root.getChildren().addAll(pageNum, btnAddaField,btnRevision,btnDate, btnInitial,btnDescription, btnCode, 
 				btnDraft,btnFinal, btnRelease, btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,
 				btnSaveRelease,btnConfirm,txtRevision,txtDate,txtInitial,txtDescription, txtCode);
 		
+		/**
+		 * Setting up the scene
+		 */
 		Scene scene = new Scene(root, screenWidth, screenHeight, Color.WHITE);
 		stage.setScene(scene);
 		stage.setTitle("Revision Log");
@@ -546,23 +631,15 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		stage.setX(primaryScreenBounds.getMinX());
 		stage.setY(primaryScreenBounds.getMinY());
 		stage.setWidth(primaryScreenBounds.getWidth());
-		stage.setHeight(primaryScreenBounds.getHeight());
-		
+		stage.setHeight(primaryScreenBounds.getHeight());	
 	}
+	
 	
 	public static Group currentLayout() {
 		return group;
 	}
 	
-	@Override
-	public void handle(ActionEvent event) {
-		if(event.getSource() == btnAddaField) {
-			System.out.println("Add a field button was clicked :)");
-		}
-		if(event.getSource() == btnHelp) {
-			System.out.println("Display new help menu with exit button");
-		}
-	}
+
 
 
 }
