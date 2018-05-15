@@ -27,7 +27,6 @@ import javafx.event.ActionEvent;
 public class revisionLog extends Application implements  EventHandler<ActionEvent>{
 	/**  fix buttons tomorrow using hover and CSS import*/
 	
-	//Initializing the buttons
 	Button btnAddaField;
 	Button btnRevision;
 	Button btnDate;
@@ -46,14 +45,12 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 	Button btnSaveRelease;
 	Button btnConfirm;
 	
-	//Initializing the textfields
 	TextField txtRevision;
 	TextField txtDate;
 	TextField txtInitial;
 	TextField txtDescription;
 	TextField txtCode;
 	
-	//Initializing the choiceboxes
 	ChoiceBox<Integer> pageNum;
 	
 	public double numberOfFields = 2.5;
@@ -62,7 +59,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 	public static void main(String[] args) {
 		/** launches are javaFx */
 		launch(args);
-	} //end main
+	}
 
 	/**
 	 *  To create Javafx app -> stage inside screen inside layout where we find widget
@@ -77,7 +74,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		int screenWidth=(int) primaryScreenBounds.getWidth();
 		int screenHeight = (int) primaryScreenBounds.getHeight();
 		
-		//Creating the border
+
 		Line line = new Line(60,60,60,screenHeight-80);
 		line.setStroke(Color.BLACK);
 		root.getChildren().add(line);
@@ -114,7 +111,6 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		pageNum.setLayoutX(fieldWidthAlignment * 0.5);
 		pageNum.setLayoutY(proportionalHeight * 1.5);
 		
-		//Allows the user to add a new field for a new revision
 		btnAddaField = new Button();
 		btnAddaField.setText("Add a Field");
 		btnAddaField.setOnAction(this);
@@ -127,7 +123,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold; \r\n");
@@ -147,7 +143,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		});
 		
 		btnAddaField.setOnAction(e -> {
-			if (numberOfFields < 8.5) { //Checks if page is full of revisions
+			if (numberOfFields < 8.5) {
 				numberOfFields += 0.4;
 				
 				btnSaveDraft = new Button();
@@ -160,7 +156,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 						"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 						"    -fx-background-insets: 0,1,2;\r\n" + 
 						"    -fx-background-radius: 3,2,1;\r\n" + 
-						"    -fx-padding: 3 10 3 10;\r\n" + 
+						"    -fx-padding: 5 10 5 10;\r\n" + 
 						"    -fx-text-fill: black;\r\n" + 
 						"    -fx-font-size: 12px; \r\n" + 
 						"    -fx-font-weight: bold;");
@@ -176,7 +172,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 						"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 						"    -fx-background-insets: 0,1,2;\r\n" + 
 						"    -fx-background-radius: 3,2,1;\r\n" + 
-						"    -fx-padding: 3 10 3 10;\r\n" + 
+						"    -fx-padding: 5 10 5 10;\r\n" + 
 						"    -fx-text-fill: black;\r\n" + 
 						"    -fx-font-size: 12px; \r\n" + 
 						"    -fx-font-weight: bold;");
@@ -192,7 +188,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 						"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 						"    -fx-background-insets: 0,1,2;\r\n" + 
 						"    -fx-background-radius: 3,2,1;\r\n" + 
-						"    -fx-padding: 3 10 3 10;\r\n" + 
+						"    -fx-padding: 5 10 5 10;\r\n" + 
 						"    -fx-text-fill: black;\r\n" + 
 						"    -fx-font-size: 12px; \r\n" + 
 						"    -fx-font-weight: bold;");
@@ -262,7 +258,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -284,7 +280,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -306,7 +302,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -328,7 +324,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -350,7 +346,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -372,7 +368,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -386,7 +382,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -400,7 +396,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" +
 				"    -fx-font-weight: bold;");
@@ -415,7 +411,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -445,7 +441,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -472,7 +468,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -501,7 +497,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -516,7 +512,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
@@ -531,7 +527,7 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 				"    -fx-background-insets: 0,1,2;\r\n" + 
 				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 3 10 3 10;\r\n" + 
+				"    -fx-padding: 5 10 5 10;\r\n" + 
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");	
@@ -540,12 +536,10 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 				btnDraft,btnFinal, btnRelease, btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,
 				btnSaveRelease,btnConfirm,txtRevision,txtDate,txtInitial,txtDescription, txtCode);
 		
-		//Initializes the scene
 		Scene scene = new Scene(root, screenWidth, screenHeight, Color.WHITE);
 		stage.setScene(scene);
 		stage.setTitle("Revision Log");
 		
-		//Shows the revision log scene on the stage
 		stage.setScene(scene);
 		stage.show();
 
@@ -556,7 +550,6 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 		
 	}
 	
-	//Returns the current layout
 	public static Group currentLayout() {
 		return group;
 	}
@@ -573,3 +566,4 @@ public class revisionLog extends Application implements  EventHandler<ActionEven
 
 
 }
+
