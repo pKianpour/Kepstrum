@@ -476,7 +476,7 @@ public class revisionLog extends Application{
 				btnPrint.setEffect(null);
 			}
 		});
-		btnPrint.setOnAction(e -> Print.start());
+		btnPrint.setOnAction(e -> Print.pageSetup(root));
 		
 		/**
 		 * Directs to DNA Plot page
