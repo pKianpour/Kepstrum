@@ -1,4 +1,6 @@
 
+import java.util.Optional;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -15,7 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 
 /** 
@@ -598,7 +604,21 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		btnSaveRelease.setOnAction(e -> {
+			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation Release");
+			alert.setHeaderText("Are you sure you'd like to Release?");
 
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				// actions if ok
+				// ex. add to DB
+			} else {
+				// user chose CANCEL or closed the dialog
+			}
+
+		});
 		/**
 		 * Add everything to scene
 		 */
