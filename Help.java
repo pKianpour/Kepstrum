@@ -6,7 +6,6 @@ import javafx.scene.text.Font;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.*;
 
 public class Help {
@@ -18,18 +17,23 @@ public class Help {
 		window.setHeight(500);
 		window.setWidth(600);
 		window.setMinWidth(250);
-
 		
-		Label lblHelpDef = new Label("Scroll Over For Button/Label Definition");
+		DropShadow shadowDrop = new DropShadow();
+		
+		Label lblHelpDef = new Label("Scroll Over Word For Its Definition");
 		lblHelpDef.setTextFill(Color.BLACK);
-		lblHelpDef.setFont(new Font("Arial", 24));
+		lblHelpDef.setFont(new Font("KufiStandardGK", 24));
+		lblHelpDef.setStyle("-fx-font-weight: bold;");
+		lblHelpDef.setAlignment(Pos.CENTER);
 		
+		Label lblRevisionDef = new Label("Revision number of test.");
+		lblRevisionDef.setVisible(false);
+		lblRevisionDef.setMinHeight(25);
 		
 		Label lblRevision = new Label();
 		lblRevision.setText("Revision");
-		lblRevision.setMinWidth(85);
-		lblRevision.setMinHeight(20);
-		lblRevision.setTooltip(new Tooltip("Revision number of test."));
+		lblRevision.setMinWidth(110);
+		lblRevision.setMinHeight(25);
 		lblRevision.setAlignment(Pos.CENTER);
 		lblRevision.setStyle(" -fx-background-color: \r\n" +  
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -40,12 +44,23 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		lblRevision.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblRevisionDef.setVisible(true);
+			lblRevision.setEffect(shadowDrop);
+		});
+		lblRevision.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblRevisionDef.setVisible(false);
+			lblRevision.setEffect(null);
+		});
+		
+		Label lblDateDef = new Label("The date the test took place.");
+		lblDateDef.setVisible(false);
+		lblDateDef.setMinHeight(25);
 		
 		Label lblDate = new Label();
 		lblDate.setText("Date");
-		lblDate.setMinWidth(85);
-		lblDate.setMinHeight(20);
-		lblDate.setTooltip(new Tooltip("The date the test took place."));
+		lblDate.setMinWidth(110);
+		lblDate.setMinHeight(25);
 		lblDate.setAlignment(Pos.CENTER);
 		lblDate.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -56,11 +71,23 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		lblDate.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblDateDef.setVisible(true);
+			lblDate.setEffect(shadowDrop);
+		});
+		lblDate.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblDateDef.setVisible(false);
+			lblDate.setEffect(null);
+		});
+		
+		Label lblInitialDef = new Label("What does this do????");
+		lblInitialDef.setVisible(false);
+		lblInitialDef.setMinHeight(25);
 		
 		Label lblInitial = new Label();
 		lblInitial.setText("Initial");
-		lblInitial.setMinWidth(85);
-		lblInitial.setTooltip(new Tooltip("What does this do????."));
+		lblInitial.setMinWidth(110);
+		lblInitial.setMinHeight(25);
 		lblInitial.setAlignment(Pos.CENTER);
 		lblInitial.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -71,12 +98,23 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		lblInitial.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblInitialDef.setVisible(true);
+			lblInitial.setEffect(shadowDrop);
+		});
+		lblInitial.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblInitialDef.setVisible(false);
+			lblInitial.setEffect(null);
+		});
+		
+		Label lblDescriptionDef = new Label("A brief description of the associated revision.");
+		lblDescriptionDef.setVisible(false);
+		lblDescriptionDef.setMinHeight(25);
 			
 		Label lblDescription = new Label();
 		lblDescription.setText("Description");
-		lblDescription.setMinWidth(85);
-		lblDescription.setMinHeight(20);
-		lblDescription.setTooltip(new Tooltip("A brief description of the associated revision"));
+		lblDescription.setMinWidth(110);
+		lblDescription.setMinHeight(25);
 		lblDescription.setAlignment(Pos.CENTER);
 		lblDescription.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -87,12 +125,23 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		lblDescription.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblDescriptionDef.setVisible(true);
+			lblDescription.setEffect(shadowDrop);
+		});
+		lblDescription.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblDescriptionDef.setVisible(false);
+			lblDescription.setEffect(null);
+		});
+		
+		Label lblCodeDef = new Label("The code for the revision.");
+		lblCodeDef.setVisible(false);
+		lblCodeDef.setMinHeight(25);
 		
 		Label lblCode = new Label();
 		lblCode.setText("Code");
-		lblCode.setMinWidth(85);
-		lblCode.setMinHeight(20);
-		lblCode.setTooltip(new Tooltip("The code for the revision"));
+		lblCode.setMinWidth(110);
+		lblCode.setMinHeight(25);
 		lblCode.setAlignment(Pos.CENTER);
 		lblCode.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -103,14 +152,25 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		lblCode.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblCodeDef.setVisible(true);
+			lblCode.setEffect(shadowDrop);
+		});
+		lblCode.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblCodeDef.setVisible(false);
+			lblCode.setEffect(null);
+		});
 		
-		Button addAFieldBtn = new Button();
-		addAFieldBtn.setText("Add a Field");
-		addAFieldBtn.setMinWidth(85);
-		addAFieldBtn.setMinHeight(20);
-		addAFieldBtn.setTooltip(new Tooltip("Adds a new revision line. "));
-		addAFieldBtn.setAlignment(Pos.CENTER);
-		addAFieldBtn.setStyle(" -fx-background-color: \r\n" + 
+		Label lblAddAFieldDef = new Label("Adds a new revision line.");
+		lblAddAFieldDef.setVisible(false);
+		lblAddAFieldDef.setMinHeight(25);
+		
+		Label lblAddAField = new Label();
+		lblAddAField.setText("Add a Field");
+		lblAddAField.setMinWidth(110);
+		lblAddAField.setMinHeight(25);
+		lblAddAField.setAlignment(Pos.CENTER);
+		lblAddAField.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
@@ -121,26 +181,25 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold; \r\n");
-		DropShadow shadowDrop = new DropShadow();
-		// Adding the shadow when the mouse cursor is on
-		addAFieldBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				addAFieldBtn.setEffect(shadowDrop);
-			}
+		lblAddAField.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblAddAFieldDef.setVisible(true);
+			lblAddAField.setEffect(shadowDrop);
 		});
-		//Removing the shadow when the mouse cursor is off
-		addAFieldBtn.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				addAFieldBtn.setEffect(null);
-			}
+		lblAddAField.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblAddAFieldDef.setVisible(false);
+			lblAddAField.setEffect(null);
 		});
 		
-		Button btnSaveDraft = new Button();
-		btnSaveDraft.setText("Save as Draft");
-		btnSaveDraft.setMinWidth(85);
-		btnSaveDraft.setMinHeight(20);
-		btnSaveDraft.setTooltip(new Tooltip("Save Revision line as a Draft. "));
-		btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
+		Label lblSaveDraftDef = new Label("Save as Draft.");
+		lblSaveDraftDef.setVisible(false);
+		lblSaveDraftDef.setMinHeight(25);
+		
+		Label lblSaveDraft = new Label();
+		lblSaveDraft.setText("Save as Draft");
+		lblSaveDraft.setMinWidth(110);
+		lblSaveDraft.setMinHeight(25);
+		lblSaveDraft.setAlignment(Pos.CENTER);
+		lblSaveDraft.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
@@ -150,26 +209,25 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
-		// Adding the shadow when the mouse cursor is on
-		btnSaveDraft.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnSaveDraft.setEffect(shadowDrop);
-			}
+		lblSaveDraft.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblSaveDraftDef.setVisible(true);
+			lblSaveDraft.setEffect(shadowDrop);
 		});
-		//Removing the shadow when the mouse cursor is off
-		btnSaveDraft.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnSaveDraft.setEffect(null);
-			}
+		lblSaveDraft.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblSaveDraftDef.setVisible(false);
+			lblSaveDraft.setEffect(null);
 		});
 		
-		Button btnSaveRelease = new Button();
-		btnSaveRelease.setText("Save & Release");
-		btnSaveRelease.setMinWidth(85);
-		btnSaveRelease.setMinHeight(20);
-		btnSaveRelease.setTooltip(new Tooltip("Save & release??"));
-		btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
+		Label lblSaveReleaseDef = new Label("Save & Release.");
+		lblSaveReleaseDef.setVisible(false);
+		lblSaveReleaseDef.setMinHeight(25);
+		
+		Label lblSaveRelease = new Label();
+		lblSaveRelease.setText("Save & Release");
+		lblSaveRelease.setMinWidth(110);
+		lblSaveRelease.setMinHeight(25);
+		lblSaveRelease.setAlignment(Pos.CENTER);
+		lblSaveRelease.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
@@ -179,25 +237,25 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		// Adding the shadow when the mouse cursor is on
-		btnSaveRelease.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnSaveRelease.setEffect(shadowDrop);
-			}
+		lblSaveRelease.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblSaveReleaseDef.setVisible(true);
+			lblSaveRelease.setEffect(shadowDrop);
 		});
-		//Removing the shadow when the mouse cursor is off
-		btnSaveRelease.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnSaveRelease.setEffect(null);
-			}
+		lblSaveRelease.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblSaveReleaseDef.setVisible(false);
+			lblSaveRelease.setEffect(null);
 		});
 		
-		Button btnConfirm = new Button();
-		btnConfirm.setText("Confirm");
-		btnConfirm.setMinWidth(85);
-		btnConfirm.setMinHeight(20);
-		btnConfirm.setTooltip(new Tooltip("Confirm Save & Release."));
-		btnConfirm.setStyle(" -fx-background-color: \r\n" + 
+		Label lblConfirmDef = new Label("Confirm Save & Release.");
+		lblConfirmDef.setVisible(false);
+		lblConfirmDef.setMinHeight(25);
+		
+		Label lblConfirm = new Label();
+		lblConfirm.setText("Confirm");
+		lblConfirm.setMinWidth(110);
+		lblConfirm.setMinHeight(25);
+		lblConfirm.setAlignment(Pos.CENTER);
+		lblConfirm.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
@@ -207,29 +265,30 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		// Adding the shadow when the mouse cursor is on
-		btnConfirm.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnConfirm.setEffect(shadowDrop);
-			}
+		lblConfirm.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblConfirmDef.setVisible(true);
+			lblConfirm.setEffect(shadowDrop);
 		});
-		//Removing the shadow when the mouse cursor is off
-		btnConfirm.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnConfirm.setEffect(null);
-			}
+		lblConfirm.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblConfirmDef.setVisible(false);
+			lblConfirm.setEffect(null);
 		});
 	
 		
 		/**
 		 * Print directs to separate print class
 		 */
-		Button btnPrint = new Button();
-		btnPrint.setText("Print");
-		btnPrint.setMinWidth(85);
-		btnPrint.setMinHeight(20);
-		btnPrint.setTooltip(new Tooltip("Print current page."));
-		btnPrint.setStyle(" -fx-background-color: \r\n" + 
+		
+		Label lblPrintDef = new Label("Print");
+		lblPrintDef.setVisible(false);
+		lblPrintDef.setMinHeight(25);
+		
+		Label lblPrint = new Label();
+		lblPrint.setText("Print");
+		lblPrint.setMinWidth(110);
+		lblPrint.setMinHeight(25);
+		lblPrint.setAlignment(Pos.CENTER);
+		lblPrint.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
@@ -239,30 +298,29 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		DropShadow shadowPrint = new DropShadow();
-		// Adding the shadow when the mouse cursor is on
-		btnPrint.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnPrint.setEffect(shadowPrint);
-			}
+		lblPrint.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblPrintDef.setVisible(true);
+			lblPrint.setEffect(shadowDrop);
 		});
-		//Removing the shadow when the mouse cursor is off
-		btnPrint.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnPrint.setEffect(null);
-			}
+		lblPrint.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblPrintDef.setVisible(false);
+			lblPrint.setEffect(null);
 		});
-		btnPrint.setOnAction(e -> Print.start());
 		
 		/**
 		 * Directs to DNA Plot page
 		 */
-		Button btnDNAPlot = new Button();
-		btnDNAPlot.setText("DNA Plot");
-		btnDNAPlot.setMinWidth(85);
-		btnDNAPlot.setMinHeight(20);
-		btnDNAPlot.setTooltip(new Tooltip("Directs user to DNA Plot."));
-		btnDNAPlot.setStyle(" -fx-background-color: \r\n" + 
+		
+		Label lblDNAPlotDef = new Label("DNA Plot");
+		lblDNAPlotDef.setVisible(false);
+		lblDNAPlotDef.setMinHeight(25);
+		
+		Label lblDNAPlot = new Label();
+		lblDNAPlot.setText("DNA Plot");
+		lblDNAPlot.setMinWidth(110);
+		lblDNAPlot.setMinHeight(25);
+		lblDNAPlot.setAlignment(Pos.CENTER);
+		lblDNAPlot.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
 				"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
@@ -272,45 +330,42 @@ public class Help {
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		
-		/**
-		 * For DNAPlot Button
-		 * When mouse goes over active buttons, display a shadow
-		 */
-		DropShadow shadowDNAPlot = new DropShadow();
-		// Adding the shadow when the mouse cursor is on
-		btnDNAPlot.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnDNAPlot.setEffect(shadowDNAPlot);
-			}
+		lblDNAPlot.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> { // Displaying a shadow effect and the definition when the mouse cursor is on
+			lblDNAPlotDef.setVisible(true);
+			lblDNAPlot.setEffect(shadowDrop);
 		});
-		/**
-		 * For DNAPlot Button
-		 * When mouse goes away from active button, remove shadow
-		 */
-		//Removing the shadow when the mouse cursor is off
-		btnDNAPlot.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				btnDNAPlot.setEffect(null);
-			}
+		lblDNAPlot.addEventHandler(MouseEvent.MOUSE_EXITED, e -> { // Removing the shadow effect and hiding the definition when the mouse cursor is off
+			lblDNAPlotDef.setVisible(false);
+			lblDNAPlot.setEffect(null);
 		});
 		
 		
 		BorderPane layout = new BorderPane();
 		
+		HBox title = new HBox();
+		title.setPadding(new Insets(15, 12, 15, 12));
+		title.getChildren().add(lblHelpDef);
+		title.setStyle("-fx-background-color: #d4ffd4");
+		layout.setTop(title);
+		
 		VBox words = new VBox();
 		words.setPadding(new Insets(10));
 		words.setSpacing(10);
-		words.getChildren().addAll(lblHelpDef, lblRevision, lblDate, lblInitial, lblDescription, lblCode, addAFieldBtn, btnSaveDraft, btnSaveRelease, btnConfirm, btnDNAPlot, btnPrint);
+		words.getChildren().addAll(lblRevision, lblDate, lblInitial, lblDescription, lblCode, lblAddAField, lblSaveDraft, lblSaveRelease, lblConfirm, lblPrint, lblDNAPlot);
+		words.setStyle("-fx-background-color: #d4ffd4");
 		layout.setLeft(words);
 		
-		//layout.getChildren().addAll(lblRevision);
-		//layout.setAlignment(Pos.CENTER);
+		VBox definitions = new VBox();
+		definitions.setPadding(new Insets(10.5));
+		definitions.setSpacing(10);
+		definitions.getChildren().addAll(lblRevisionDef, lblDateDef, lblInitialDef, lblDescriptionDef, lblCodeDef, lblAddAFieldDef, lblSaveDraftDef, lblSaveReleaseDef, lblConfirmDef, lblPrintDef, lblDNAPlotDef);
+		definitions.setStyle("-fx-background-color: #d4ffd4");
+		layout.setCenter(definitions);
 
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
+		window.setResizable(false);
 		window.showAndWait();
-		
 		
 	} //end help
 	
