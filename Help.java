@@ -15,7 +15,7 @@ public class Help {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Help");
 		window.setHeight(500);
-		window.setWidth(450);
+		window.setWidth(460);
 		window.setMinWidth(250);
 		
 		DropShadow shadowDrop = new DropShadow();
@@ -24,6 +24,7 @@ public class Help {
 		lblHelpDef.setTextFill(Color.BLACK);
 		lblHelpDef.setFont(new Font("KufiStandardGK", 24));
 		lblHelpDef.setStyle("-fx-font-weight: bold;");
+		lblHelpDef.setStyle("-fx-underline: true;");
 		lblHelpDef.setAlignment(Pos.CENTER);
 		
 		Label lblRevisionDef = new Label("Revision number of test.");
@@ -345,21 +346,21 @@ public class Help {
 		HBox title = new HBox();
 		title.setPadding(new Insets(15, 12, 15, 12));
 		title.getChildren().add(lblHelpDef);
-		title.setStyle("-fx-background-color: #d4ffd4");
+		title.setStyle("-fx-background-color: #DEFFB9");
 		layout.setTop(title);
 		
 		VBox words = new VBox();
 		words.setPadding(new Insets(10));
 		words.setSpacing(10);
 		words.getChildren().addAll(lblRevision, lblDate, lblInitial, lblDescription, lblCode, lblAddAField, lblSaveDraft, lblSaveRelease, lblConfirm, lblPrint, lblDNAPlot);
-		words.setStyle("-fx-background-color: #d4ffd4");
+		words.setStyle("-fx-background-color: #DEFFB9");
 		layout.setLeft(words);
 		
 		VBox definitions = new VBox();
 		definitions.setPadding(new Insets(10.5));
 		definitions.setSpacing(10);
 		definitions.getChildren().addAll(lblRevisionDef, lblDateDef, lblInitialDef, lblDescriptionDef, lblCodeDef, lblAddAFieldDef, lblSaveDraftDef, lblSaveReleaseDef, lblConfirmDef, lblPrintDef, lblDNAPlotDef);
-		definitions.setStyle("-fx-background-color: #d4ffd4");
+		definitions.setStyle("-fx-background-color: #DEFFB9");
 		layout.setCenter(definitions);
 
 		Scene scene = new Scene(layout);
