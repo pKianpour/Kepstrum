@@ -15,7 +15,7 @@ public class Help {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Help");
 		window.setHeight(500);
-		window.setWidth(600);
+		window.setWidth(460);
 		window.setMinWidth(250);
 		
 		DropShadow shadowDrop = new DropShadow();
@@ -24,6 +24,7 @@ public class Help {
 		lblHelpDef.setTextFill(Color.BLACK);
 		lblHelpDef.setFont(new Font("KufiStandardGK", 24));
 		lblHelpDef.setStyle("-fx-font-weight: bold;");
+		lblHelpDef.setStyle("-fx-underline: true;");
 		lblHelpDef.setAlignment(Pos.CENTER);
 		
 		Label lblRevisionDef = new Label("Revision number of test.");
