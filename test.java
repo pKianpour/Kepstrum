@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.*;
 import java.sql.SQLException;
 
+import javafx.event.ActionEvent;
+
 
 //import com.mysql.jdbc.Connection;
 
@@ -17,10 +19,10 @@ public class test {
 		try {
 			// access driver from jar file
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String connectionURL = "jdbc:mysql://localhost:3306/revisionlog?autoReconnect=true&useSSL=false";
+			String connectionURL = "jdbc:mysql://localhost:3306/mydb?autoReconnect=true&useSSL=false";
 			connection = DriverManager.getConnection(connectionURL, "root", "root1");
 			
-			String query = "SELECT * FROM revisionlog.revisionlog";
+			String query = "SELECT * FROM mydb.revision_log";
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(query);
 
@@ -30,6 +32,16 @@ public class test {
 			while (result.next()) {
 				System.out.println(result.getInt("REVISION_ID")); 	
 			}
+			
+			String sql = "INSERT INTO revision_log "
+					+ " (REVISION_ID, DATE, PROJECT_LEAD, CATEGORY, DESCRIPTION, CODE)"
+					+ "VALUES ('20', '2018-11-09', 'Aaron', '22', '17', '5')";
+			
+			statement.executeUpdate(sql);
+			
+			System.out.println("Insert complete.");
+					
+			
 			connection.close();
 			
 			
@@ -38,6 +50,12 @@ public class test {
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	void actionPerformed(ActionEvent e) {
+		//try {
+			//theQuery
+		//}
 	}
 
 	public static void main(String[] args) {
