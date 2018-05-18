@@ -1,4 +1,9 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 
 import javafx.application.Application;
@@ -33,17 +38,17 @@ public class revisionLog extends Application{
 	Button btnAddaField;
 	Button btnRevision;
 	Button btnDate;
-	Button btnProjectLead;
+//	Button btnProjectLead;
 	Button btnDescription;
 	Button btnCode;
-	Button btnDraft;
-	Button btnFinal;
-	Button btnCategory;
+//	Button btnDraft;
+//	Button btnFinal;
+//	Button btnCategory;
 	Button btnPrint;
 	Button btnDNAPlot;
 	Button btnHelp;
-	Button btnAdd1;
-	Button btnAdd2;
+//	Button btnAdd1;
+//	Button btnAdd2;
 	Button btnSaveDraft;
 	Button btnSaveRelease;
 
@@ -54,20 +59,54 @@ public class revisionLog extends Application{
 	TextField txtCode;
 	
 	ChoiceBox<Integer> pageNum;
-	ChoiceBox<String> cbCategory;
-	ChoiceBox<String> cbProjectLead;
+//	ChoiceBox<String> cbCategory;
+//	ChoiceBox<String> cbProjectLead;
 	
 	public double numberOfFields = 2.5;
 	static Group group;
 	
 	public static void main(String[] args) {
 		/** launches are javaFx */
+		
 		launch(args);
+		try {
+			connectToDatabase();
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 *  To create Javafx app -> stage inside screen inside layout where we find widget
 	 */
+	// makes the connection to the database, 
+	// I believe you need to call this function before any SQL commands
+	public static void connectToDatabase() throws ClassNotFoundException{
+		
+		java.sql.Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String connectionURL = "jdbc:mysql://localhost:3306/revisionlog?autoReconnect=true&useSSL=false";
+			connection = DriverManager.getConnection(connectionURL, "root", "root1");
+			System.out.println("Here");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+//	public static void insertField() {
+//		connectToDatabase();
+//		Int revision = txtRevision.getText();
+//		String date = txtDate.getText();
+//		String description = txtDescription.getText();
+//		Int code = txtCode.getText();
+//		
+//		PreparedStatement smt = connection.prepareStatement("INSERT INTO revisionlog.revisionlog (revision, date, description,code) values(?,?,?,?)");
+//	}
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 
@@ -106,7 +145,7 @@ public class revisionLog extends Application{
 		line6.setStroke(Color.BLACK);
 		root.getChildren().add(line6);
 		
-		int fieldWidthAlignment = screenWidth/10;
+		double fieldWidthAlignment = screenWidth/10.5;
 		
 		pageNum = new ChoiceBox<>();
 		pageNum.getItems().add(1);
@@ -122,7 +161,7 @@ public class revisionLog extends Application{
 		 * and Buttons Save as Draft, Save & Release, confirm
 		 */
 		btnAddaField = new Button();
-		btnAddaField.setText("Add a Field");
+		btnAddaField.setText("Add A New Revision and unlock the Spec");
 		btnAddaField.setLayoutX(fieldWidthAlignment);
 		btnAddaField.setLayoutY(proportionalHeight *1.5);
 		btnAddaField.setStyle(" -fx-background-color: \r\n" + 
@@ -159,8 +198,8 @@ public class revisionLog extends Application{
 				numberOfFields += 0.4;
 				
 				btnSaveDraft = new Button();
-				btnSaveDraft.setText("Save as Draft");
-				btnSaveDraft.setLayoutX(fieldWidthAlignment*8);
+				btnSaveDraft.setText("Save as PDF");
+				btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
 				btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
 				btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
 						"        #000000,\r\n" + 
@@ -175,8 +214,8 @@ public class revisionLog extends Application{
 				root.getChildren().add(btnSaveDraft);
 				
 				btnSaveRelease = new Button();
-				btnSaveRelease.setText("Save & Release");
-				btnSaveRelease.setLayoutX(fieldWidthAlignment*9);
+				btnSaveRelease.setText("Release");
+				btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
 				btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
 				btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
 						"        #000000,\r\n" + 
@@ -210,29 +249,29 @@ public class revisionLog extends Application{
 				txtDate.setStyle("-fx-background-color: #d4ffd4;");
 				root.getChildren().add(txtDate);
 				
-				cbCategory = new ChoiceBox<>();
-				cbCategory.getItems().add("Intent");
-			//	cbCategory.setValue(1);
-			//	cbCategory.setTooltip(new Tooltip("Select a page"));
-				cbCategory.setLayoutX(fieldWidthAlignment * 4);
-				cbCategory.setLayoutY(proportionalHeight * numberOfFields);
-				cbCategory.setStyle("-fx-background-color: #d4ffd4;");
-				root.getChildren().add(cbCategory);
-				
-				cbProjectLead = new ChoiceBox<>();
-				cbProjectLead.getItems().add("Payman");
-			//	cbCategory.setValue(1);
-			//	cbCategory.setTooltip(new Tooltip("Select a page"));
-				cbProjectLead.setLayoutX(fieldWidthAlignment * 3);
-				cbProjectLead.setLayoutY(proportionalHeight * numberOfFields);
-				cbProjectLead.setStyle("-fx-background-color: #d4ffd4;");
-				root.getChildren().add(cbProjectLead);
-						
+//				cbCategory = new ChoiceBox<>();
+//				cbCategory.getItems().add("Intent");
+//			//	cbCategory.setValue(1);
+//			//	cbCategory.setTooltip(new Tooltip("Select a page"));
+//				cbCategory.setLayoutX(fieldWidthAlignment * 4);
+//				cbCategory.setLayoutY(proportionalHeight * numberOfFields);
+//				cbCategory.setStyle("-fx-background-color: #d4ffd4;");
+//				root.getChildren().add(cbCategory);
+//				
+//				cbProjectLead = new ChoiceBox<>();
+//				cbProjectLead.getItems().add("Payman");
+//			//	cbCategory.setValue(1);
+//			//	cbCategory.setTooltip(new Tooltip("Select a page"));
+//				cbProjectLead.setLayoutX(fieldWidthAlignment * 3);
+//				cbProjectLead.setLayoutY(proportionalHeight * numberOfFields);
+//				cbProjectLead.setStyle("-fx-background-color: #d4ffd4;");
+//				root.getChildren().add(cbProjectLead);
+//						
 				txtDescription = new TextField();
 				txtDescription.setPrefWidth(260);
 				txtDescription.setPromptText("1234567890123456789012345678901234567890");
 				txtDescription.setAlignment(Pos.BASELINE_LEFT);
-				txtDescription.setLayoutX(fieldWidthAlignment*5);
+				txtDescription.setLayoutX(fieldWidthAlignment*3);
 				txtDescription.setLayoutY(proportionalHeight*numberOfFields);
 				txtDescription.setStyle("-fx-background-color: #d4ffd4;");
 				root.getChildren().add(txtDescription);
@@ -241,7 +280,7 @@ public class revisionLog extends Application{
 				txtCode.setPrefWidth(100);
 				txtCode.setPromptText("1234567890");
 				txtCode.setAlignment(Pos.CENTER);
-				txtCode.setLayoutX(fieldWidthAlignment*7);
+				txtCode.setLayoutX(fieldWidthAlignment*5);
 				txtCode.setLayoutY(proportionalHeight*numberOfFields);
 				txtCode.setStyle("-fx-background-color: #d4ffd4;");
 				root.getChildren().add(txtCode);
@@ -314,64 +353,64 @@ public class revisionLog extends Application{
 		txtDate.setLayoutX(fieldWidthAlignment*2);
 		txtDate.setLayoutY(proportionalHeight*2.5);
 		txtDate.setStyle("-fx-background-color: #d4ffd4;");
-		
-		/**
-		 * Project Lead disabled button
-		 */
-		btnProjectLead = new Button();
-		btnProjectLead.setText("Project Lead");
-		btnProjectLead.setLayoutX(fieldWidthAlignment*3);
-		btnProjectLead.setLayoutY(proportionalHeight *2);
-		btnProjectLead.setStyle(" -fx-background-color: \r\n" + 
-				"        linear-gradient(#f49541, #f49541),\r\n" + 
-				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
-				"    -fx-background-insets: 0,1,2;\r\n" + 
-				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 5 10 5 10;\r\n" + 
-				"    -fx-text-fill: black;\r\n" + 
-				"    -fx-font-size: 12px; \r\n" + 
-				"    -fx-font-weight: bold;");
-
-		/**
-		 * Category disabled button
-		 */
-		btnCategory = new Button();
-		btnCategory.setText("Category");
-		btnCategory.setLayoutX(fieldWidthAlignment*4);
-		btnCategory.setLayoutY(proportionalHeight *2);
-		btnCategory.setStyle(" -fx-background-color: \r\n" + 
-				"        linear-gradient(#f49541, #f49541),\r\n" + 
-				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
-				"    -fx-background-insets: 0,1,2;\r\n" + 
-				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 5 10 5 10;\r\n" + 
-				"    -fx-text-fill: black;\r\n" + 
-				"    -fx-font-size: 12px; \r\n" + 
-				"    -fx-font-weight: bold;");
-		
-		
-		cbCategory = new ChoiceBox<>();
-		cbCategory.getItems().add("Intent");
-	//	cbCategory.setValue(1);
-	//	cbCategory.setTooltip(new Tooltip("Select a page"));
-		cbCategory.setLayoutX(fieldWidthAlignment * 4);
-		cbCategory.setLayoutY(proportionalHeight * 2.5);
-		cbCategory.setStyle("-fx-background-color: #d4ffd4;");
-		
-		cbProjectLead = new ChoiceBox<>();
-		cbProjectLead.getItems().add("Payman");
-	//	cbCategory.setValue(1);
-	//	cbCategory.setTooltip(new Tooltip("Select a page"));
-		cbProjectLead.setLayoutX(fieldWidthAlignment * 3);
-		cbProjectLead.setLayoutY(proportionalHeight * 2.5);
-		cbProjectLead.setStyle("-fx-background-color: #d4ffd4;");
+//		
+//		/**
+//		 * Project Lead disabled button
+//		 */
+//		btnProjectLead = new Button();
+//		btnProjectLead.setText("Project Lead");
+//		btnProjectLead.setLayoutX(fieldWidthAlignment*3);
+//		btnProjectLead.setLayoutY(proportionalHeight *2);
+//		btnProjectLead.setStyle(" -fx-background-color: \r\n" + 
+//				"        linear-gradient(#f49541, #f49541),\r\n" + 
+//				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+//				"    -fx-background-insets: 0,1,2;\r\n" + 
+//				"    -fx-background-radius: 3,2,1;\r\n" + 
+//				"    -fx-padding: 5 10 5 10;\r\n" + 
+//				"    -fx-text-fill: black;\r\n" + 
+//				"    -fx-font-size: 12px; \r\n" + 
+//				"    -fx-font-weight: bold;");
+//
+//		/**
+//		 * Category disabled button
+//		 */
+//		btnCategory = new Button();
+//		btnCategory.setText("Category");
+//		btnCategory.setLayoutX(fieldWidthAlignment*4);
+//		btnCategory.setLayoutY(proportionalHeight *2);
+//		btnCategory.setStyle(" -fx-background-color: \r\n" + 
+//				"        linear-gradient(#f49541, #f49541),\r\n" + 
+//				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+//				"    -fx-background-insets: 0,1,2;\r\n" + 
+//				"    -fx-background-radius: 3,2,1;\r\n" + 
+//				"    -fx-padding: 5 10 5 10;\r\n" + 
+//				"    -fx-text-fill: black;\r\n" + 
+//				"    -fx-font-size: 12px; \r\n" + 
+//				"    -fx-font-weight: bold;");
+//		
+//		
+//		cbCategory = new ChoiceBox<>();
+//		cbCategory.getItems().add("Intent");
+//	//	cbCategory.setValue(1);
+//	//	cbCategory.setTooltip(new Tooltip("Select a page"));
+//		cbCategory.setLayoutX(fieldWidthAlignment * 4);
+//		cbCategory.setLayoutY(proportionalHeight * 2.5);
+//		cbCategory.setStyle("-fx-background-color: #d4ffd4;");
+//		
+//		cbProjectLead = new ChoiceBox<>();
+//		cbProjectLead.getItems().add("Payman");
+//	//	cbCategory.setValue(1);
+//	//	cbCategory.setTooltip(new Tooltip("Select a page"));
+//		cbProjectLead.setLayoutX(fieldWidthAlignment * 3);
+//		cbProjectLead.setLayoutY(proportionalHeight * 2.5);
+//		cbProjectLead.setStyle("-fx-background-color: #d4ffd4;");
 		
 		/**
 		 * Description disabled button label
 		 */
 		btnDescription = new Button();
 		btnDescription.setText("Description");
-		btnDescription.setLayoutX(fieldWidthAlignment*5);
+		btnDescription.setLayoutX(fieldWidthAlignment*3);
 		btnDescription.setLayoutY(proportionalHeight *2);
 		btnDescription.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -389,7 +428,7 @@ public class revisionLog extends Application{
 		txtDescription.setPrefWidth(260);
 		txtDescription.setPromptText("1234567890123456789012345678901234567890");
 		txtDescription.setAlignment(Pos.BASELINE_LEFT);
-		txtDescription.setLayoutX(fieldWidthAlignment*5);
+		txtDescription.setLayoutX(fieldWidthAlignment*3);
 		txtDescription.setLayoutY(proportionalHeight*2.5);
 		txtDescription.setStyle("-fx-background-color: #d4ffd4;");
 		
@@ -398,7 +437,7 @@ public class revisionLog extends Application{
 		 */
 		btnCode = new Button();
 		btnCode.setText("Code");
-		btnCode.setLayoutX(fieldWidthAlignment*7);
+		btnCode.setLayoutX(fieldWidthAlignment*5);
 		btnCode.setLayoutY(proportionalHeight *2);
 		btnCode.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
@@ -417,44 +456,44 @@ public class revisionLog extends Application{
 		txtCode.setPrefWidth(100);
 		txtCode.setPromptText("1234567890");
 		txtCode.setAlignment(Pos.CENTER);
-		txtCode.setLayoutX(fieldWidthAlignment*7);
+		txtCode.setLayoutX(fieldWidthAlignment*5);
 		txtCode.setLayoutY(proportionalHeight*2.5);
 		txtCode.setStyle("-fx-background-color: #d4ffd4;");
 		
-		/**
-		 * Draft Disabled Button
-		 */
-		btnDraft = new Button();
-		btnDraft.setText("Draft");
-		btnDraft.setLayoutX(fieldWidthAlignment*8);
-		btnDraft.setLayoutY(proportionalHeight *2);
-		btnDraft.setStyle(" -fx-background-color: \r\n" + 
-				"        linear-gradient(#f49541, #f49541),\r\n" + 
-				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
-				"    -fx-background-insets: 0,1,2;\r\n" + 
-				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 5 10 5 10;\r\n" + 
-				"    -fx-text-fill: black;\r\n" + 
-				"    -fx-font-size: 12px; \r\n" + 
-				"    -fx-font-weight: bold;");
-		
-		/**
-		 * Final Disabled Button
-		 */
-		btnFinal = new Button();
-		btnFinal.setText("Final");
-		btnFinal.setLayoutX(fieldWidthAlignment*9);
-		btnFinal.setLayoutY(proportionalHeight *2);
-		btnFinal.setStyle(" -fx-background-color: \r\n" + 
-				"        linear-gradient(#f49541, #f49541),\r\n" + 
-				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
-				"    -fx-background-insets: 0,1,2;\r\n" + 
-				"    -fx-background-radius: 3,2,1;\r\n" + 
-				"    -fx-padding: 5 10 5 10;\r\n" + 
-				"    -fx-text-fill: black;\r\n" + 
-				"    -fx-font-size: 12px; \r\n" + 
-				"    -fx-font-weight: bold;");
-		
+//		/**
+//		 * Draft Disabled Button
+//		 */
+//		btnDraft = new Button();
+//		btnDraft.setText("Draft");
+//		btnDraft.setLayoutX(fieldWidthAlignment*8);
+//		btnDraft.setLayoutY(proportionalHeight *2);
+//		btnDraft.setStyle(" -fx-background-color: \r\n" + 
+//				"        linear-gradient(#f49541, #f49541),\r\n" + 
+//				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+//				"    -fx-background-insets: 0,1,2;\r\n" + 
+//				"    -fx-background-radius: 3,2,1;\r\n" + 
+//				"    -fx-padding: 5 10 5 10;\r\n" + 
+//				"    -fx-text-fill: black;\r\n" + 
+//				"    -fx-font-size: 12px; \r\n" + 
+//				"    -fx-font-weight: bold;");
+//		
+//		/**
+//		 * Final Disabled Button
+//		 */
+//		btnFinal = new Button();
+//		btnFinal.setText("Final");
+//		btnFinal.setLayoutX(fieldWidthAlignment*9);
+//		btnFinal.setLayoutY(proportionalHeight *2);
+//		btnFinal.setStyle(" -fx-background-color: \r\n" + 
+//				"        linear-gradient(#f49541, #f49541),\r\n" + 
+//				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
+//				"    -fx-background-insets: 0,1,2;\r\n" + 
+//				"    -fx-background-radius: 3,2,1;\r\n" + 
+//				"    -fx-padding: 5 10 5 10;\r\n" + 
+//				"    -fx-text-fill: black;\r\n" + 
+//				"    -fx-font-size: 12px; \r\n" + 
+//				"    -fx-font-weight: bold;");
+//		
 		
 		/**
 		 * Print directs to separate print class
@@ -574,8 +613,8 @@ public class revisionLog extends Application{
 		 * Save as draft functional button
 		 */
 		btnSaveDraft = new Button();
-		btnSaveDraft.setText("Save as Draft");
-		btnSaveDraft.setLayoutX(fieldWidthAlignment*8);
+		btnSaveDraft.setText("Save as PDF");
+		btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
 		btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
 		btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
@@ -591,8 +630,8 @@ public class revisionLog extends Application{
 		 * Save & Release functional Button
 		 */
 		btnSaveRelease = new Button();
-		btnSaveRelease.setText("Save & Release");
-		btnSaveRelease.setLayoutX(fieldWidthAlignment*9);
+		btnSaveRelease.setText("Release");
+		btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
 		btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
 		btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
@@ -622,8 +661,8 @@ public class revisionLog extends Application{
 		/**
 		 * Add everything to scene
 		 */
-		root.getChildren().addAll(pageNum, cbCategory, cbProjectLead, btnAddaField,btnRevision,btnDate, btnProjectLead,btnDescription, btnCode, 
-				btnDraft,btnFinal, btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,btnCategory,
+		root.getChildren().addAll(pageNum, btnAddaField,btnRevision,btnDate, btnDescription, btnCode, 
+				 btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,
 				btnSaveRelease,txtRevision,txtDate,txtDescription, txtCode);
 		
 		/**
