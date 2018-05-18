@@ -1,0 +1,48 @@
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        int screenWidth=(int) primaryScreenBounds.getWidth();
+        int screenHeight = (int) primaryScreenBounds.getHeight();
+        double fieldWidthAlignment = screenWidth/10.5;
+        int proportionalWidth = screenWidth/16;
+        int proportionalHeight = screenHeight/10;
+        
+        /**
+         * Revision textField 1
+         */
+        txtRevision = new TextField();
+        txtRevision.setPrefWidth(100);
+        txtRevision.setPromptText("1234567890");
+        txtRevision.setAlignment(Pos.CENTER);
+        txtRevision.setLayoutX(fieldWidthAlignment);
+        txtRevision.setLayoutY(proportionalHeight*numberOfFields);
+        txtRevision.setStyle("-fx-background-color: #d4ffd4;");
+        /**
+         * Date Text field 1
+         */
+        txtDate = new TextField();
+        txtDate.setPrefWidth(90);
+        txtDate.setPromptText("yy/mm/dd");
+        txtDate.setAlignment(Pos.CENTER);
+        txtDate.setLayoutX(fieldWidthAlignment*2);
+        txtDate.setLayoutY(proportionalHeight*numberOfFields);
+        txtDate.setStyle("-fx-background-color: #d4ffd4;");
+        /**
+         * Description Textfield 1
+         */
+        txtDescription = new TextField();
+        txtDescription.setPrefWidth(260);
+        txtDescription.setPromptText("1234567890123456789012345678901234567890");
+        txtDescription.setAlignment(Pos.BASELINE_LEFT);
+        txtDescription.setLayoutX(fieldWidthAlignment*3);
+        txtDescription.setLayoutY(proportionalHeight*numberOfFields);
+        txtDescription.setStyle("-fx-background-color: #d4ffd4;");
+        /**
+         * 
+         * Code TextField 1
+         */
+        txtCode = new TextField();
+        txtCode.setPrefWidth(100);
+        txtCode.setPromptText("1234567890");
+        txtCode.setAlignment(Pos.CENTER);
+        txtCode.setLayoutX(fieldWidthAlignment*5);
+        txtCode.setLayoutY(proportionalHeight*numberOfFields);
+        txtCode.setStyle("-fx-background-color: #d4ffd4;");
