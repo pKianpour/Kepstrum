@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -82,7 +83,7 @@ public class revisionLog extends Application{
 	 */
 	// makes the connection to the database, 
 	// I believe you need to call this function before any SQL commands
-	public static void connectToDatabase() throws ClassNotFoundException{
+	public static Connection connectToDatabase() throws ClassNotFoundException{
 		
 		java.sql.Connection connection = null;
 		try {
@@ -94,18 +95,29 @@ public class revisionLog extends Application{
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return connection;
 	}
 	
-	
-//	public static void insertField() {
-//		connectToDatabase();
-//		Int revision = txtRevision.getText();
-//		String date = txtDate.getText();
-//		String description = txtDescription.getText();
-//		Int code = txtCode.getText();
-//		
-//		PreparedStatement smt = connection.prepareStatement("INSERT INTO revisionlog.revisionlog (revision, date, description,code) values(?,?,?,?)");
-//	}
+	public static void btnSavePDF(String revision, String date, String description, String code) throws ClassNotFoundException{
+		try {
+			
+		
+			Connection connection = connectToDatabase();
+			String query = "INSERT INTO revisionlog.revisionlog (`REVISON_ID`, `DATE`,`DESCRIPTION`,`CODE`) VALUES (?,?,?,?)";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1,revision);
+			ps.setString(2, date);
+			ps.setString(3, description);
+			ps.setString(4, code);
+			System.out.print(ps.toString());
+			
+			ps.executeQuery(query);
+		}
+		catch (SQLException error) {
+			error.printStackTrace();
+		
+		}
+	}
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -626,6 +638,15 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
+		btnHelp.setOnAction(e -> {
+			try {
+				btnSavePDF(btnRevision.getText(),btnDate.getText(),btnDescription.getText(),btnCode.getText());
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+				
 		/**
 		 * Save & Release functional Button
 		 */
