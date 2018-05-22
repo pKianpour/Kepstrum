@@ -1,5 +1,6 @@
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 
 /** 
  * extends application which is an import
@@ -50,14 +52,15 @@ public class revisionLog extends Application{
 	Button btnSaveRelease;
 
 	
-	TextField txtRevision;
+	Label lblRevision;
+	
 	TextField txtDate;
 	TextField txtDescription;
 	TextField txtCode;
 	
 	ChoiceBox<Integer> pageNum;
 	
-	public double numberOfFields = 2.5;
+	public static double numberOfFields = 2.1;
 	
 	static Group group;
 	
@@ -65,6 +68,7 @@ public class revisionLog extends Application{
 		/** launches are javaFx */
 		
 		launch(args);
+
 	}
 
 	/**
@@ -105,6 +109,160 @@ public class revisionLog extends Application{
 		
 		}
 	}
+	
+	public static void updateFields(Group root) {
+		try {
+			Connection connection = connectToDatabase();
+//			String query = "SELECT REVISION_ID from mydb.revision_log";
+//			Statement st = connection.createStatement();
+//			ResultSet rs = st.executeQuery(query);
+//			int count = 0;
+//			while (rs.next())
+//				count++;
+//			System.out.println(count);
+			
+			String query1 = "SELECT * FROM mydb.revision_log";
+			Statement stst = connection.createStatement();
+			ResultSet fullRevisionLog = stst.executeQuery(query1);
+			
+			
+			
+			int StartAtOne = 1;
+			
+			while(fullRevisionLog.next()) {
+				
+				numberOfFields += 0.4;
+				
+				int revisionNum = fullRevisionLog.getInt("REVISION_ID");
+				Date dateCreated = fullRevisionLog.getDate("DATE");
+				String description = fullRevisionLog.getString("DESCRIPTION");
+				int code = fullRevisionLog.getInt("CODE");
+				int release =fullRevisionLog.getInt("RELEASE");
+				System.out.format("%s, %s, %s, %s,\n", revisionNum, dateCreated, description, code);
+				
+				
+				
+				Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+			    int screenWidth=(int) primaryScreenBounds.getWidth();
+			    int screenHeight = (int) primaryScreenBounds.getHeight();
+			    double fieldWidthAlignment = screenWidth/10.5;
+			    int proportionalWidth = screenWidth/16;
+			    int proportionalHeight = screenHeight/10;
+			    
+			    if (release == 0) {
+			    					    
+				    Label lblRevision = new Label();
+				    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
+				    lblRevision.setPrefWidth(100);
+				    lblRevision.setAlignment(Pos.CENTER);
+				    lblRevision.setLayoutX(fieldWidthAlignment);
+				    lblRevision.setLayoutY(proportionalHeight*numberOfFields);
+				    lblRevision.setStyle("-fx-background-color: #d4ffd4;-fx-padding: 5 10 5 10;");
+					
+				    
+				    /**
+				     * Date Text field 1
+				     */
+				    TextField txtDate = new TextField();
+				    txtDate.setText(String.valueOf(dateCreated));
+
+				    txtDate.setPrefWidth(90);
+				    txtDate.setPromptText("yy/mm/dd");
+				    txtDate.setAlignment(Pos.CENTER);
+				    txtDate.setLayoutX(fieldWidthAlignment*2);
+				    txtDate.setLayoutY(proportionalHeight*numberOfFields);
+			        txtDate.setStyle("-fx-background-color: #d4ffd4;");
+			        /**
+			         * Description Textfield 1
+			         * 			         */
+				       
+			        TextField txtDescription = new TextField();
+			        txtDescription.setText(description);
+				    txtDescription.setPrefWidth(260);
+			        txtDescription.setPromptText("1234567890123456789012345678901234567890");
+			        txtDescription.setAlignment(Pos.BASELINE_LEFT);
+			        txtDescription.setLayoutX(fieldWidthAlignment*3);
+			        txtDescription.setLayoutY(proportionalHeight*numberOfFields);
+				    txtDescription.setStyle("-fx-background-color: #d4ffd4;");
+				    /**
+			         * 
+			         * Code TextField 1
+			         * 		         */
+				    TextField txtCode = new TextField();
+				    txtCode.setText(String.valueOf((code)));
+				    txtCode.setPrefWidth(100);
+				    txtCode.setPromptText("1234567890");
+				    txtCode.setAlignment(Pos.CENTER);
+				    txtCode.setLayoutX(fieldWidthAlignment*5);
+				    txtCode.setLayoutY(proportionalHeight*numberOfFields);
+				    txtCode.setStyle("-fx-background-color: #d4ffd4;");
+					
+				    StartAtOne +=1;
+				    root.getChildren().addAll(lblRevision, txtDate, txtDescription, txtCode);
+			    }else {
+			    	
+				    Label lblRevision = new Label();
+				    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
+				    lblRevision.setPrefWidth(100);
+				    lblRevision.setAlignment(Pos.CENTER);
+				    lblRevision.setLayoutX(fieldWidthAlignment);
+				    lblRevision.setLayoutY(proportionalHeight*numberOfFields);
+				    lblRevision.setStyle("-fx-background-color: #DCDCDC;-fx-padding: 5 10 5 10;");
+					
+				    
+				    /**
+				     * Date Text field 1
+				     */
+			        
+			        Label lblDate = new Label();
+			        lblDate.setText(String.valueOf(dateCreated));
+			        lblDate.setAlignment(Pos.CENTER);
+			        lblDate.setLayoutX(fieldWidthAlignment*2);
+			        lblDate.setLayoutY(proportionalHeight*numberOfFields);
+			        lblDate.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
+			        
+			        /**
+			         * Description Textfield 1
+			         * 			         */
+				    
+				    Label lblDescription = new Label();
+				    lblDescription.setText(description);
+				    lblDescription.setPrefWidth(260);
+				    lblDescription.setAlignment(Pos.BASELINE_LEFT);
+				    lblDescription.setLayoutX(fieldWidthAlignment*3);
+				    lblDescription.setLayoutY(proportionalHeight*numberOfFields);
+				    lblDescription.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
+				    /**
+			         * 
+			         * Code TextField 1
+			         * 		         */
+				    
+				    Label lblCode = new Label();
+				    lblCode.setText(String.valueOf((code)));
+				    lblCode.setPrefWidth(100);
+
+				    lblCode.setAlignment(Pos.CENTER);
+				    lblCode.setLayoutX(fieldWidthAlignment*5);
+				    lblCode.setLayoutY(proportionalHeight*numberOfFields);
+				    lblCode.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
+					
+				    StartAtOne +=1;
+				    root.getChildren().addAll(lblRevision, lblDate, lblDescription, lblCode);
+			    	
+			    	
+			    	
+			    }
+			    /**
+			    * Revision textField 1
+			    */
+				
+			}
+			
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -195,14 +353,14 @@ public class revisionLog extends Application{
 		 * Set's functionality to Add a field button
 		 */
 		btnAddaField.setOnAction(e -> addAField(root, window));
-		
+		//btnAddaField.setOnAction(e -> updateFields(root));
 		/**
 		 * Revision disabled button label
 		 */
 		btnRevision = new Button();
 		btnRevision.setText("Revision");
 		btnRevision.setLayoutX(fieldWidthAlignment);
-		btnRevision.setLayoutY(proportionalHeight *2);
+		btnRevision.setLayoutY(proportionalHeight *numberOfFields);
 		btnRevision.setStyle(" -fx-background-color: \r\n" +  
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
@@ -214,23 +372,12 @@ public class revisionLog extends Application{
 				"    -fx-font-weight: bold;");
 		
 		/**
-		 * Revision textField 1
-		 */
-		txtRevision = new TextField();
-		txtRevision.setPrefWidth(100);
-		txtRevision.setPromptText("1234567890");
-		txtRevision.setAlignment(Pos.CENTER);
-		txtRevision.setLayoutX(fieldWidthAlignment);
-		txtRevision.setLayoutY(proportionalHeight*2.5);
-		txtRevision.setStyle("-fx-background-color: #d4ffd4;");
-		
-		/**
 		 * Date disabled button
 		 */
 		btnDate = new Button();
 		btnDate.setText("Date");
 		btnDate.setLayoutX(fieldWidthAlignment*2);
-		btnDate.setLayoutY(proportionalHeight *2);
+		btnDate.setLayoutY(proportionalHeight *numberOfFields);
 		btnDate.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
@@ -240,16 +387,6 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		/**
-		 * Date Text field 1
-		 */
-		txtDate = new TextField();
-		txtDate.setPrefWidth(90);
-		txtDate.setPromptText("yy/mm/dd");
-		txtDate.setAlignment(Pos.CENTER);
-		txtDate.setLayoutX(fieldWidthAlignment*2);
-		txtDate.setLayoutY(proportionalHeight*2.5);
-		txtDate.setStyle("-fx-background-color: #d4ffd4;");
 		
 		/**
 		 * Description disabled button label
@@ -257,7 +394,7 @@ public class revisionLog extends Application{
 		btnDescription = new Button();
 		btnDescription.setText("Description");
 		btnDescription.setLayoutX(fieldWidthAlignment*3);
-		btnDescription.setLayoutY(proportionalHeight *2);
+		btnDescription.setLayoutY(proportionalHeight *numberOfFields);
 		btnDescription.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
@@ -267,16 +404,6 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		/**
-		 * Description Textfield 1
-		 */
-		txtDescription = new TextField();
-		txtDescription.setPrefWidth(260);
-		txtDescription.setPromptText("1234567890123456789012345678901234567890");
-		txtDescription.setAlignment(Pos.BASELINE_LEFT);
-		txtDescription.setLayoutX(fieldWidthAlignment*3);
-		txtDescription.setLayoutY(proportionalHeight*2.5);
-		txtDescription.setStyle("-fx-background-color: #d4ffd4;");
 		
 		/**
 		 * Code disabled Button
@@ -284,7 +411,7 @@ public class revisionLog extends Application{
 		btnCode = new Button();
 		btnCode.setText("Code");
 		btnCode.setLayoutX(fieldWidthAlignment*5);
-		btnCode.setLayoutY(proportionalHeight *2);
+		btnCode.setLayoutY(proportionalHeight *numberOfFields);
 		btnCode.setStyle(" -fx-background-color: \r\n" + 
 				"        linear-gradient(#f49541, #f49541),\r\n" + 
 				"        linear-gradient(#f49541 0%, #f49541 49%, #f49541 50%, #f49541 100%);\r\n" + 
@@ -294,18 +421,6 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		/**
-		 * 
-		 * Code TextField 1
-		 */
-		txtCode = new TextField();
-		txtCode.setPrefWidth(100);
-		txtCode.setPromptText("1234567890");
-		txtCode.setAlignment(Pos.CENTER);
-		txtCode.setLayoutX(fieldWidthAlignment*5);
-		txtCode.setLayoutY(proportionalHeight*2.5);
-		txtCode.setStyle("-fx-background-color: #d4ffd4;");
-		
 		
 		/**
 		 * Print directs to separate print class
@@ -440,7 +555,7 @@ public class revisionLog extends Application{
 				"    -fx-font-weight: bold;");
 		btnSaveDraft.setOnAction(e -> {
 			try {
-				btnSavePDF(txtRevision.getText(),txtDate.getText(),txtDescription.getText(), txtCode.getText());
+				btnSavePDF(lblRevision.getText(),txtDate.getText(),txtDescription.getText(), txtCode.getText());
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -476,14 +591,19 @@ public class revisionLog extends Application{
 			} else {
 				// user chose CANCEL or closed the dialog
 			}
+			
 
 		});
 		/**
 		 * Add everything to scene
 		 */
+		
+		// Adds existing revisions from database on application startup
+		updateFields(root);
+		
 		root.getChildren().addAll(pageNum, btnAddaField,btnRevision,btnDate, btnDescription, btnCode, 
 				 btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,
-				btnSaveRelease,txtRevision,txtDate,txtDescription, txtCode);
+				btnSaveRelease);
 		
 		/**
 		 * Setting up the scene
@@ -547,16 +667,14 @@ public class revisionLog extends Application{
 					"    -fx-font-weight: bold;");
 			root.getChildren().add(btnSaveRelease);
 			
-
-			
-			txtRevision = new TextField();
-			txtRevision.setPrefWidth(100);
-			txtRevision.setPromptText("1234567890");
-			txtRevision.setAlignment(Pos.CENTER);
-			txtRevision.setLayoutX(fieldWidthAlignment);
-			txtRevision.setLayoutY(proportionalHeight*numberOfFields);
-			txtRevision.setStyle("-fx-background-color: #d4ffd4;");
-			root.getChildren().add(txtRevision);
+			lblRevision = new Label();
+			lblRevision.setPrefWidth(100);
+			lblRevision.setAlignment(Pos.CENTER);
+			lblRevision.setMinHeight(20);
+			lblRevision.setLayoutX(fieldWidthAlignment);
+			lblRevision.setLayoutY(proportionalHeight*numberOfFields);
+			lblRevision.setStyle("-fx-background-color: #d4ffd4; -fx-padding: 4 10 4 10; -fx-background-radius: 3,2,1;  -fx-background-insets: 0,1,2;");
+			root.getChildren().add(lblRevision);
 			
 			txtDate = new TextField();
 			txtDate.setPrefWidth(90);
