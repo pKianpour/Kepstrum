@@ -81,7 +81,7 @@ public class revisionLog extends Application{
 		java.sql.Connection connection = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String connectionURL = "jdbc:mysql://localhost:3306/revisionlog?autoReconnect=true&useSSL=false";
+			String connectionURL = "jdbc:mysql://localhost:3306/mydb?autoReconnect=true&useSSL=false";
 			connection = DriverManager.getConnection(connectionURL, "root", "root1");
 			System.out.println("Here");
 		}
@@ -94,7 +94,7 @@ public class revisionLog extends Application{
 	public static void btnSavePDF(String revision, String date, String description, String code) throws ClassNotFoundException{
 		try {
 			Connection connection = connectToDatabase();
-			String query = "INSERT INTO revisionlog.revisionlog(`REVISION_ID`, `DATE`,`DESCRIPTION`,`CODE`) VALUES (?,?,?,?)";
+			String query = "INSERT INTO mydb.revision_log(`REVISION_ID`, `DATE`,`DESCRIPTION`,`CODE`) VALUES (?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1,revision);
 			ps.setString(2, date);
@@ -121,7 +121,7 @@ public class revisionLog extends Application{
 //				count++;
 //			System.out.println(count);
 			
-			String query1 = "SELECT * FROM revisionlog.revisionlog";
+			String query1 = "SELECT * FROM mydb.revisionlog";
 			Statement stst = connection.createStatement();
 			ResultSet fullRevisionLog = stst.executeQuery(query1);
 			
@@ -213,7 +213,7 @@ public class revisionLog extends Application{
 							"    -fx-font-weight: bold;");
 					
 					Button btnSaveRelease = new Button();
-					btnSaveRelease.setText("Release");
+					btnSaveRelease.setText("Release R" + StartAtOne);
 					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
 					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
 					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
@@ -226,6 +226,7 @@ public class revisionLog extends Application{
 							"    -fx-text-fill: black;\r\n" + 
 							"    -fx-font-size: 12px; \r\n" + 
 							"    -fx-font-weight: bold;");
+					btnSaveRelease.setOnAction(e -> release(btnSaveRelease.getText()));
 					
 				    StartAtOne +=1;
 				    root.getChildren().addAll(lblRevision, txtDate, txtDescription, txtCode, btnSaveRelease, btnSaveDraft);
@@ -282,8 +283,8 @@ public class revisionLog extends Application{
 					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
 					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
 							"        #000000,\r\n" + 
-							"        linear-gradient(#DCDCDC, #DCDCDC),\r\n" + 
-							"        linear-gradient(#DCDCDC 0%, #DCDCDC 49%, #DCDCDC 50%, #DCDCDC 100%);\r\n" + 
+							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
 							"    -fx-background-insets: 0,1,2;\r\n" + 
 							"    -fx-background-radius: 3,2,1;\r\n" + 
 							"    -fx-padding: 5 10 5 10;\r\n" + 
@@ -293,7 +294,7 @@ public class revisionLog extends Application{
 	
 					
 					Button btnSaveRelease = new Button();
-					btnSaveRelease.setText("Release");
+					btnSaveRelease.setText("Release R" + StartAtOne);
 					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
 					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
 					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
@@ -640,22 +641,7 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		btnSaveRelease.setOnAction(e -> {
-			
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Confirmation Release");
-			alert.setHeaderText("Are you sure you'd like to Release?");
-
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-				// actions if ok
-				// ex. add to DB
-			} else {
-				// user chose CANCEL or closed the dialog
-			}
-			
-
-		});
+		btnSaveRelease.setOnAction(e -> release(btnSaveRelease.getText()));
 		/**
 		 * Add everything to scene
 		 */
@@ -779,6 +765,7 @@ public class revisionLog extends Application{
 		/**
 		 * Determines how many fields per page
 		 */
+		
 		else if(numberOfFields > 8.5) {
 			Group root2 = new Group();
 			root2.getChildren().addAll(btnRevision, pageNum);
@@ -786,6 +773,38 @@ public class revisionLog extends Application{
 			pageNum.getItems().add(2);
 			pageNum.setValue(2);
 			stage.setScene(page2);
+		}
+	}
+	
+	public static void release(String revNum) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Release");
+		alert.setHeaderText("Are you sure you'd like to Release?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			revNum = revNum.substring(9);
+			//int revNum = Integer.parseInt(revNum);
+			try {
+				Connection connection = connectToDatabase();
+				String query = "UPDATE mydb.revisionlog SET RELEASE=? WHERE REVISION_ID=?";
+				
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setInt(1, 1);
+				ps.setString(2, revNum);
+				ps.executeUpdate();
+				connection.close();
+				
+				//String query1 = "SELECT * FROM mydb.revisionlog WHERE REVISION_ID=" + revNum;
+				//Statement stst = connection.createStatement();
+				//ResultSet fullRevisionLog = stst.executeQuery(query);
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+			// actions if ok
+			// ex. add to DB
+		} else {
+			// user chose CANCEL or closed the dialog
 		}
 	}
 	
