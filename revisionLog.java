@@ -6,9 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -60,6 +63,19 @@ public class revisionLog extends Application{
 	
 	ChoiceBox<Integer> pageNum;
 	
+	static ObservableList<Button> buttons = FXCollections.observableArrayList();
+	static ObservableList<Label> labels = FXCollections.observableArrayList();
+	static ObservableList<TextField> textFields = FXCollections.observableArrayList();
+	
+	static ObservableList<Label> labelsTemp = FXCollections.observableArrayList();
+	static ObservableList<TextField> textFieldsTemp = FXCollections.observableArrayList();
+	
+	ArrayList<Button> lst = new ArrayList<>();
+	
+	//ObservableList<Button> buttons = FXCollections.observableList(lst);
+	
+	
+	
 	public static double numberOfFields = 2.1;
 	public static int StartAtOne = 1;
 	static Group group;
@@ -70,262 +86,6 @@ public class revisionLog extends Application{
 		launch(args);
 
 	}
-
-	/**
-	 *  To create Javafx app -> stage inside screen inside layout where we find widget
-	 */
-	// makes the connection to the database, 
-	// I believe you need to call this function before any SQL commands
-	public static Connection connectToDatabase() throws ClassNotFoundException{
-		
-		java.sql.Connection connection = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String connectionURL = "jdbc:mysql://localhost:3306/mydb?autoReconnect=true&useSSL=false";
-			connection = DriverManager.getConnection(connectionURL, "root", "root1");
-			System.out.println("Here");
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return connection;
-	}
-	
-	public static void btnSavePDF(String revision, String date, String description, String code) throws ClassNotFoundException{
-		try {
-			Connection connection = connectToDatabase();
-			String query = "INSERT INTO mydb.revision_log(`REVISION_ID`, `DATE`,`DESCRIPTION`,`CODE`) VALUES (?,?,?,?)";
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1,revision);
-			ps.setString(2, date);
-			ps.setString(3, description);
-			ps.setString(4, code);
-			System.out.print(ps.toString());
-			
-			ps.executeUpdate();
-		}
-		catch (SQLException error) {
-			error.printStackTrace();
-		
-		}
-	}
-	
-	public static void updateFields(Group root) {
-		try {
-			Connection connection = connectToDatabase();
-//			String query = "SELECT REVISION_ID from mydb.revision_log";
-//			Statement st = connection.createStatement();
-//			ResultSet rs = st.executeQuery(query);
-//			int count = 0;
-//			while (rs.next())
-//				count++;
-//			System.out.println(count);
-			
-			String query1 = "SELECT * FROM mydb.revisionlog";
-			Statement stst = connection.createStatement();
-			ResultSet fullRevisionLog = stst.executeQuery(query1);
-			
-			
-			
-			
-			
-			while(fullRevisionLog.next()) {
-				
-				numberOfFields += 0.4;
-				
-				int revisionNum = fullRevisionLog.getInt("REVISION_ID");
-				Date dateCreated = fullRevisionLog.getDate("DATE");
-				String description = fullRevisionLog.getString("DESCRIPTION");
-				int code = fullRevisionLog.getInt("CODE");
-				int release =fullRevisionLog.getInt("RELEASED");
-				System.out.format("%s, %s, %s, %s,\n", revisionNum, dateCreated, description, code);
-				
-				
-				
-				Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-			    int screenWidth=(int) primaryScreenBounds.getWidth();
-			    int screenHeight = (int) primaryScreenBounds.getHeight();
-			    double fieldWidthAlignment = screenWidth/10.5;
-			    int proportionalWidth = screenWidth/16;
-			    int proportionalHeight = screenHeight/10;
-			    
-			    if (release == 0) {
-			    					    
-				    Label lblRevision = new Label();
-				    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
-				    lblRevision.setPrefWidth(100);
-				    lblRevision.setAlignment(Pos.CENTER);
-				    lblRevision.setLayoutX(fieldWidthAlignment);
-				    lblRevision.setLayoutY(proportionalHeight*numberOfFields);
-				    lblRevision.setStyle("-fx-background-color: #d4ffd4;-fx-padding: 5 10 5 10;");
-					
-				    
-				    /**
-				     * Date Text field 1
-				     */
-				    TextField txtDate = new TextField();
-				    txtDate.setText(String.valueOf(dateCreated));
-
-				    txtDate.setPrefWidth(90);
-				    txtDate.setPromptText("yy/mm/dd");
-				    txtDate.setAlignment(Pos.CENTER);
-				    txtDate.setLayoutX(fieldWidthAlignment*2);
-				    txtDate.setLayoutY(proportionalHeight*numberOfFields);
-			        txtDate.setStyle("-fx-background-color: #d4ffd4;");
-			        /**
-			         * Description Textfield 1
-			         * 			         */
-				       
-			        TextField txtDescription = new TextField();
-			        txtDescription.setText(description);
-				    txtDescription.setPrefWidth(260);
-			        txtDescription.setPromptText("1234567890123456789012345678901234567890");
-			        txtDescription.setAlignment(Pos.BASELINE_LEFT);
-			        txtDescription.setLayoutX(fieldWidthAlignment*3);
-			        txtDescription.setLayoutY(proportionalHeight*numberOfFields);
-				    txtDescription.setStyle("-fx-background-color: #d4ffd4;");
-				    /**
-			         * 
-			         * Code TextField 1
-			         * 		         */
-				    TextField txtCode = new TextField();
-				    txtCode.setText(String.valueOf((code)));
-				    txtCode.setPrefWidth(100);
-				    txtCode.setPromptText("1234567890");
-				    txtCode.setAlignment(Pos.CENTER);
-				    txtCode.setLayoutX(fieldWidthAlignment*5);
-				    txtCode.setLayoutY(proportionalHeight*numberOfFields);
-				    txtCode.setStyle("-fx-background-color: #d4ffd4;");
-				    
-					Button btnSaveDraft = new Button();
-					btnSaveDraft.setText("Save as PDF");
-					btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
-					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-					
-					Button btnSaveRelease = new Button();
-					btnSaveRelease.setText("Release R" + StartAtOne);
-					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
-					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-					btnSaveRelease.setOnAction(e -> release(btnSaveRelease.getText()));
-					
-				    StartAtOne +=1;
-				    root.getChildren().addAll(lblRevision, txtDate, txtDescription, txtCode, btnSaveRelease, btnSaveDraft);
-			    }else {
-			    	
-				    Label lblRevision = new Label();
-				    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
-				    lblRevision.setPrefWidth(100);
-				    lblRevision.setAlignment(Pos.CENTER);
-				    lblRevision.setLayoutX(fieldWidthAlignment);
-				    lblRevision.setLayoutY(proportionalHeight*numberOfFields);
-				    lblRevision.setStyle("-fx-background-color: #DCDCDC;-fx-padding: 5 10 5 10;");
-					
-				    
-				    /**
-				     * Date Text field 1
-				     */
-			        
-			        Label lblDate = new Label();
-			        lblDate.setText(String.valueOf(dateCreated));
-			        lblDate.setAlignment(Pos.CENTER);
-			        lblDate.setLayoutX(fieldWidthAlignment*2);
-			        lblDate.setLayoutY(proportionalHeight*numberOfFields);
-			        lblDate.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
-			        
-			        /**
-			         * Description Textfield 1
-			         * 			         */
-				    
-				    Label lblDescription = new Label();
-				    lblDescription.setText(description);
-				    lblDescription.setPrefWidth(260);
-				    lblDescription.setAlignment(Pos.BASELINE_LEFT);
-				    lblDescription.setLayoutX(fieldWidthAlignment*3);
-				    lblDescription.setLayoutY(proportionalHeight*numberOfFields);
-				    lblDescription.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
-				    /**
-			         * 
-			         * Code TextField 1
-			         * 		         */
-				    
-				    Label lblCode = new Label();
-				    lblCode.setText(String.valueOf((code)));
-				    lblCode.setPrefWidth(100);
-
-				    lblCode.setAlignment(Pos.CENTER);
-				    lblCode.setLayoutX(fieldWidthAlignment*5);
-				    lblCode.setLayoutY(proportionalHeight*numberOfFields);
-				    lblCode.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
-					
-					Button btnSaveDraft = new Button();
-					btnSaveDraft.setText("Save as PDF");
-					btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
-					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-	
-					
-					Button btnSaveRelease = new Button();
-					btnSaveRelease.setText("Release R" + StartAtOne);
-					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
-					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#DCDCDC, #DCDCDC),\r\n" + 
-							"        linear-gradient(#DCDCDC 0%, #DCDCDC 49%, #DCDCDC 50%, #DCDCDC 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-					
-				    
-				    StartAtOne +=1;
-				    root.getChildren().addAll(lblRevision, lblDate, lblDescription, lblCode, btnSaveRelease, btnSaveDraft);
-			    	
-			    	
-			    	
-			    }
-			    /**
-			    * Revision textField 1
-			    */
-				
-			}
-			
-		} catch(Exception e) {
-			System.err.println(e.getMessage());
-		}
-	}
-
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -630,7 +390,7 @@ public class revisionLog extends Application{
 		btnSaveRelease = new Button();
 		btnSaveRelease.setText("Release");
 		btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
-		btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
+		btnSaveRelease.setLayoutY(proportionalHeight*1.5);
 		btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
 				"        #000000,\r\n" + 
 				"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
@@ -641,7 +401,7 @@ public class revisionLog extends Application{
 				"    -fx-text-fill: black;\r\n" + 
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
-		btnSaveRelease.setOnAction(e -> release(btnSaveRelease.getText()));
+		btnSaveRelease.setOnAction(e -> release());
 		/**
 		 * Add everything to scene
 		 */
@@ -649,9 +409,12 @@ public class revisionLog extends Application{
 		// Adds existing revisions from database on application startup
 		updateFields(root);
 		
-		root.getChildren().addAll(pageNum, btnAddaField,btnRevision,btnDate, btnDescription, btnCode, 
-				 btnPrint, btnDNAPlot,btnHelp,btnSaveDraft,
-				btnSaveRelease);
+		buttons.addAll(btnAddaField, btnRevision, btnDate, btnDescription, btnCode, btnPrint, btnDNAPlot, btnHelp, btnSaveDraft);
+		
+		for (int i = 0; i < buttons.size(); i++)
+			root.getChildren().add(buttons.get(i));
+		
+		root.getChildren().add(pageNum);
 		
 		/**
 		 * Setting up the scene
@@ -668,6 +431,14 @@ public class revisionLog extends Application{
 		window.setWidth(primaryScreenBounds.getWidth());
 		window.setHeight(primaryScreenBounds.getHeight());	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void addAField(Group root, Stage stage) {
 		
@@ -698,31 +469,6 @@ public class revisionLog extends Application{
 					"    -fx-font-size: 12px; \r\n" + 
 					"    -fx-font-weight: bold;");
 			root.getChildren().add(btnSaveDraft);
-			
-			btnSaveRelease = new Button();
-			btnSaveRelease.setText("Release");
-			btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
-			btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
-			btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
-					"        #000000,\r\n" + 
-					"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-					"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-					"    -fx-background-insets: 0,1,2;\r\n" + 
-					"    -fx-background-radius: 3,2,1;\r\n" + 
-					"    -fx-padding: 5 10 5 10;\r\n" + 
-					"    -fx-text-fill: black;\r\n" + 
-					"    -fx-font-size: 12px; \r\n" + 
-					"    -fx-font-weight: bold;");
-			root.getChildren().add(btnSaveRelease);
-			
-//			lblRevision = new Label();
-//			lblRevision.setPrefWidth(100);
-//			lblRevision.setAlignment(Pos.CENTER);
-//			lblRevision.setMinHeight(20);
-//			lblRevision.setLayoutX(fieldWidthAlignment);
-//			lblRevision.setLayoutY(proportionalHeight*numberOfFields);
-//			lblRevision.setStyle("-fx-background-color: #d4ffd4; -fx-padding: 4 10 4 10; -fx-background-radius: 3,2,1;  -fx-background-insets: 0,1,2;");
-//			root.getChildren().add(lblRevision);
 			
 		    lblRevision = new Label();
 		    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
@@ -776,27 +522,69 @@ public class revisionLog extends Application{
 		}
 	}
 	
-	public static void release(String revNum) {
+
+	public static void btnSavePDF(String revision, String date, String description, String code) throws ClassNotFoundException{
+		try {
+			Connection connection = connectToDatabase();
+			String query = "INSERT INTO mydb.revision_log(`REVISION_ID`, `DATE`,`DESCRIPTION`,`CODE`) VALUES (?,?,?,?)";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1,revision);
+			ps.setString(2, date);
+			ps.setString(3, description);
+			ps.setString(4, code);
+			System.out.print(ps.toString());
+			
+			ps.executeUpdate();
+		}
+		catch (SQLException error) {
+			error.printStackTrace();
+		
+		}
+	}
+	
+	// makes the connection to the database, 
+	// I believe you need to call this function before any SQL commands
+	public static Connection connectToDatabase() throws ClassNotFoundException{
+		
+		java.sql.Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String connectionURL = "jdbc:mysql://localhost:3306/mydb?autoReconnect=true&useSSL=false";
+			connection = DriverManager.getConnection(connectionURL, "root", "root1");
+			System.out.println("Here");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
+	}
+	
+	public static void refreshTable() {
+		removeFields();
+		updateFields(group);
+	}
+	
+	public static void release() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Release");
 		alert.setHeaderText("Are you sure you'd like to Release?");
 
 		Optional<ButtonType> result = alert.showAndWait();
+		
+		
 		if (result.get() == ButtonType.OK) {
-			revNum = revNum.substring(9);
-			//int revNum = Integer.parseInt(revNum);
+			//revNum = revNum.substring(9);
 			try {
 				Connection connection = connectToDatabase();
-				String query = "UPDATE mydb.revisionlog SET RELEASED=? WHERE REVISION_ID=?";
+				String query = "UPDATE mydb.revisionlog SET RELEASED=? WHERE SAVEPDF=?";
 				
 				PreparedStatement ps = connection.prepareStatement(query);
 				ps.setInt(1, 1);
-				ps.setString(2, revNum);
+				ps.setInt(2, 1);
 				ps.executeUpdate();
 				connection.close();
 				StartAtOne = 1;
-				updateFields(group);
-				System.out.println(StartAtOne);
+				refreshTable();
 
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
@@ -808,10 +596,242 @@ public class revisionLog extends Application{
 		}
 	}
 	
-	public static Group currentLayout() {
-		return group;
+	public static void removeFields() {
+		buttons.clear();
+		for (int i = 0; i < labels.size(); i++)
+			group.getChildren().remove(labels.get(i));
+		for (int i = 0; i < textFields.size(); i++)
+			group.getChildren().remove(textFields.get(i));
 	}
+	
+	public static void updateFields(Group root) {
+		numberOfFields = 2.1;
+		try {
+			Connection connection = connectToDatabase();
+			String query1 = "SELECT * FROM mydb.revisionlog";
+			Statement stst = connection.createStatement();
+			ResultSet fullRevisionLog = stst.executeQuery(query1);
+			
+			
+			
+			
+			
+			while(fullRevisionLog.next()) {
+				
+				numberOfFields += 0.4;
+				
+				int revisionNum = fullRevisionLog.getInt("REVISION_ID");
+				Date dateCreated = fullRevisionLog.getDate("DATE");
+				String description = fullRevisionLog.getString("DESCRIPTION");
+				int code = fullRevisionLog.getInt("CODE");
+				int release =fullRevisionLog.getInt("RELEASED");
+				System.out.format("%s, %s, %s, %s\n", revisionNum, dateCreated, description, code);
+				
+				
+				
+				Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+			    int screenWidth=(int) primaryScreenBounds.getWidth();
+			    int screenHeight = (int) primaryScreenBounds.getHeight();
+			    double fieldWidthAlignment = screenWidth/10.5;
+			    int proportionalWidth = screenWidth/16;
+			    int proportionalHeight = screenHeight/10;
+			    
+			    if (release == 0) {
+			    					    
+				    Label lblRevision = new Label();
+				    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
+				    lblRevision.setPrefWidth(100);
+				    lblRevision.setAlignment(Pos.CENTER);
+				    lblRevision.setLayoutX(fieldWidthAlignment);
+				    lblRevision.setLayoutY(proportionalHeight*numberOfFields);
+				    lblRevision.setStyle("-fx-background-color: #d4ffd4;-fx-padding: 5 10 5 10;");
+					
+				    
+				    /**
+				     * Date Text field 1
+				     */
+				    TextField txtDate = new TextField();
+				    txtDate.setText(String.valueOf(dateCreated));
 
+				    txtDate.setPrefWidth(90);
+				    txtDate.setPromptText("yy/mm/dd");
+				    txtDate.setAlignment(Pos.CENTER);
+				    txtDate.setLayoutX(fieldWidthAlignment*2);
+				    txtDate.setLayoutY(proportionalHeight*numberOfFields);
+			        txtDate.setStyle("-fx-background-color: #d4ffd4;");
+			        /**
+			         * Description Textfield 1
+			         * 			         */
+				       
+			        TextField txtDescription = new TextField();
+			        txtDescription.setText(description);
+				    txtDescription.setPrefWidth(260);
+			        txtDescription.setPromptText("1234567890123456789012345678901234567890");
+			        txtDescription.setAlignment(Pos.BASELINE_LEFT);
+			        txtDescription.setLayoutX(fieldWidthAlignment*3);
+			        txtDescription.setLayoutY(proportionalHeight*numberOfFields);
+				    txtDescription.setStyle("-fx-background-color: #d4ffd4;");
+				    /**
+			         * 
+			         * Code TextField 1
+			         * 		         */
+				    TextField txtCode = new TextField();
+				    txtCode.setText(String.valueOf((code)));
+				    txtCode.setPrefWidth(100);
+				    txtCode.setPromptText("1234567890");
+				    txtCode.setAlignment(Pos.CENTER);
+				    txtCode.setLayoutX(fieldWidthAlignment*5);
+				    txtCode.setLayoutY(proportionalHeight*numberOfFields);
+				    txtCode.setStyle("-fx-background-color: #d4ffd4;");
+				    
+					Button btnSaveDraft = new Button();
+					btnSaveDraft.setText("Save as PDF");
+					btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
+					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
+					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
+							"        #000000,\r\n" + 
+							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+							"    -fx-background-insets: 0,1,2;\r\n" + 
+							"    -fx-background-radius: 3,2,1;\r\n" + 
+							"    -fx-padding: 5 10 5 10;\r\n" + 
+							"    -fx-text-fill: black;\r\n" + 
+							"    -fx-font-size: 12px; \r\n" + 
+							"    -fx-font-weight: bold;");
+					
+					Button btnSaveRelease = new Button();
+					btnSaveRelease.setText("Release R" + StartAtOne);
+					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
+					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
+					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
+							"        #000000,\r\n" + 
+							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+							"    -fx-background-insets: 0,1,2;\r\n" + 
+							"    -fx-background-radius: 3,2,1;\r\n" + 
+							"    -fx-padding: 5 10 5 10;\r\n" + 
+							"    -fx-text-fill: black;\r\n" + 
+							"    -fx-font-size: 12px; \r\n" + 
+							"    -fx-font-weight: bold;");
+					btnSaveRelease.setOnAction(e -> release());
+					
+				    StartAtOne +=1;
+				    
+				    labels.add(lblRevision);
+				    labelsTemp.add(lblRevision);
+				    textFields.addAll(txtDate, txtDescription, txtCode);
+				    textFieldsTemp.addAll(txtDate, txtDescription, txtCode);
+				    
+				    for (int i = 0; i < textFieldsTemp.size(); i++)
+				    	root.getChildren().addAll(textFieldsTemp.get(i));
+				    for (int i = 0; i < labelsTemp.size(); i++)
+				    	root.getChildren().add(labelsTemp.get(i));
+				    root.getChildren().addAll(btnSaveRelease, btnSaveDraft);
+				    
+				    textFieldsTemp.clear();
+				    labelsTemp.clear();
+			    }
+			    else {
+			    	
+				    Label lblRevision = new Label();
+				    lblRevision.setText(String.valueOf(("R" + StartAtOne)));
+				    lblRevision.setPrefWidth(100);
+				    lblRevision.setAlignment(Pos.CENTER);
+				    lblRevision.setLayoutX(fieldWidthAlignment);
+				    lblRevision.setLayoutY(proportionalHeight*numberOfFields);
+				    lblRevision.setStyle("-fx-background-color: #DCDCDC;-fx-padding: 5 10 5 10;");
+					
+				    
+				    /**
+				     * Date Text field 1
+				     */
+			        
+			        Label lblDate = new Label();
+			        lblDate.setText(String.valueOf(dateCreated));
+			        lblDate.setAlignment(Pos.CENTER);
+			        lblDate.setLayoutX(fieldWidthAlignment*2);
+			        lblDate.setLayoutY(proportionalHeight*numberOfFields);
+			        lblDate.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
+			        
+			        /**
+			         * Description Textfield 1
+			         * 			         */
+				    
+				    Label lblDescription = new Label();
+				    lblDescription.setText(description);
+				    lblDescription.setPrefWidth(260);
+				    lblDescription.setAlignment(Pos.BASELINE_LEFT);
+				    lblDescription.setLayoutX(fieldWidthAlignment*3);
+				    lblDescription.setLayoutY(proportionalHeight*numberOfFields);
+				    lblDescription.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
+				    /**
+			         * 
+			         * Code TextField 1
+			         * 		         */
+				    
+				    Label lblCode = new Label();
+				    lblCode.setText(String.valueOf((code)));
+				    lblCode.setPrefWidth(100);
+
+				    lblCode.setAlignment(Pos.CENTER);
+				    lblCode.setLayoutX(fieldWidthAlignment*5);
+				    lblCode.setLayoutY(proportionalHeight*numberOfFields);
+				    lblCode.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
+					
+					Button btnSaveDraft = new Button();
+					btnSaveDraft.setText("Save as PDF");
+					btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
+					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
+					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
+							"        #000000,\r\n" + 
+							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
+							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
+							"    -fx-background-insets: 0,1,2;\r\n" + 
+							"    -fx-background-radius: 3,2,1;\r\n" + 
+							"    -fx-padding: 5 10 5 10;\r\n" + 
+							"    -fx-text-fill: black;\r\n" + 
+							"    -fx-font-size: 12px; \r\n" + 
+							"    -fx-font-weight: bold;");
+	
+					
+					Button btnSaveRelease = new Button();
+					btnSaveRelease.setText("Release R" + StartAtOne);
+					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
+					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
+					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
+							"        #000000,\r\n" + 
+							"        linear-gradient(#DCDCDC, #DCDCDC),\r\n" + 
+							"        linear-gradient(#DCDCDC 0%, #DCDCDC 49%, #DCDCDC 50%, #DCDCDC 100%);\r\n" + 
+							"    -fx-background-insets: 0,1,2;\r\n" + 
+							"    -fx-background-radius: 3,2,1;\r\n" + 
+							"    -fx-padding: 5 10 5 10;\r\n" + 
+							"    -fx-text-fill: black;\r\n" + 
+							"    -fx-font-size: 12px; \r\n" + 
+							"    -fx-font-weight: bold;");
+					
+				    
+				    StartAtOne +=1;
+				    
+				    labels.addAll(lblRevision, lblDate, lblDescription, lblCode);
+				    labelsTemp.addAll(lblRevision, lblDate, lblDescription, lblCode);
+				    for (int i = 0; i < labelsTemp.size(); i++)
+				    	root.getChildren().addAll(labelsTemp.get(i));
+				    labelsTemp.clear();
+				    root.getChildren().addAll(btnSaveRelease, btnSaveDraft);
+			    	
+			    	
+			    	
+			    }
+			    /**
+			    * Revision textField 1
+			    */
+				
+			}
+			
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
 
 }
 
