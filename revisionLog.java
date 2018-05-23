@@ -137,7 +137,7 @@ public class revisionLog extends Application{
 				Date dateCreated = fullRevisionLog.getDate("DATE");
 				String description = fullRevisionLog.getString("DESCRIPTION");
 				int code = fullRevisionLog.getInt("CODE");
-				int release =fullRevisionLog.getInt("RELEASE");
+				int release =fullRevisionLog.getInt("RELEASED");
 				System.out.format("%s, %s, %s, %s,\n", revisionNum, dateCreated, description, code);
 				
 				
@@ -787,17 +787,17 @@ public class revisionLog extends Application{
 			//int revNum = Integer.parseInt(revNum);
 			try {
 				Connection connection = connectToDatabase();
-				String query = "UPDATE mydb.revisionlog SET RELEASE=? WHERE REVISION_ID=?";
+				String query = "UPDATE mydb.revisionlog SET RELEASED=? WHERE REVISION_ID=?";
 				
 				PreparedStatement ps = connection.prepareStatement(query);
 				ps.setInt(1, 1);
 				ps.setString(2, revNum);
 				ps.executeUpdate();
 				connection.close();
-				
-				//String query1 = "SELECT * FROM mydb.revisionlog WHERE REVISION_ID=" + revNum;
-				//Statement stst = connection.createStatement();
-				//ResultSet fullRevisionLog = stst.executeQuery(query);
+				StartAtOne = 1;
+				updateFields(group);
+				System.out.println(StartAtOne);
+
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
