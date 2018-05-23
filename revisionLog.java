@@ -1,4 +1,7 @@
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -34,6 +37,18 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 
 /** 
  * extends application which is an import
@@ -377,11 +392,12 @@ public class revisionLog extends Application{
 				"    -fx-font-size: 12px; \r\n" + 
 				"    -fx-font-weight: bold;");
 		btnSaveDraft.setOnAction(e -> {
-			try {
-				btnSavePDF(lblRevision.getText(),txtDate.getText(),txtDescription.getText(), txtCode.getText());
-			} catch (ClassNotFoundException e1) {
-				e1.printStackTrace();
-			}
+			generatePDFFromSQL();
+//			try {
+//				//btnSavePDF(lblRevision.getText(),txtDate.getText(),txtDescription.getText(), txtCode.getText());
+//			} catch (ClassNotFoundException e1) {
+//				e1.printStackTrace();
+//			}
 		});
 				
 		/**
@@ -506,6 +522,9 @@ public class revisionLog extends Application{
 			txtCode.setStyle("-fx-background-color: #d4ffd4;");
 			root.getChildren().add(txtCode);
 			
+			labels.add(lblRevision);
+			textFields.addAll(txtDate, txtDescription, txtCode);
+			
 			StartAtOne +=1;
 		}
 		/**
@@ -558,6 +577,55 @@ public class revisionLog extends Application{
 		}
 		return connection;
 	}
+	
+	public static void generatePDF(){
+		
+		try{	
+			Document document = new Document();
+			PdfWriter.getInstance(document, new FileOutputStream("revisionLog.pdf"));
+			
+			document.open();
+			Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+			Chunk chunk = new Chunk("Hello world", font);
+			
+			document.add(chunk);
+			document.close();
+			
+			System.out.println("Finished");
+		} catch (Exception e){
+			System.err.println(e);
+		}
+	}
+	
+	public static void generatePDFFromSQL(){
+		try{
+			Connection connection = connectToDatabase();
+			Document document = new Document();
+			
+			PdfWriter.getInstance(document, new FileOutputStream("revisionLog.pdf"));
+			document.open();
+			
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+
+			String query = "SELECT * FROM mydb.revisionlog";
+			ps=connection.prepareStatement(query);
+			rs=ps.executeQuery();
+
+			while (rs.next()){
+				Paragraph para=new Paragraph(rs.getInt("REVISION_ID")+"  "+rs.getString("DESCRIPTION"));
+				document.add(para);
+				document.add(new Paragraph(" "));
+
+			} 
+			document.close();
+			System.out.println("Finished");
+
+		} catch (Exception e){
+		System.err.println(e);
+		}
+	}
+
 	
 	public static void refreshTable() {
 		removeFields();
