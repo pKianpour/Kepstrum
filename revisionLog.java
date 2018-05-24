@@ -1,7 +1,5 @@
 
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -33,7 +31,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -44,9 +41,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 
@@ -111,10 +105,11 @@ public class revisionLog extends Application{
 		group = root;
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		
-		int screenWidth=(int) primaryScreenBounds.getWidth();
+		int screenWidth = (int) primaryScreenBounds.getWidth();
 		int screenHeight = (int) primaryScreenBounds.getHeight();
 		
-
+		
+		
 		Line line = new Line(60,60,60,screenHeight-80);
 		line.setStroke(Color.BLACK);
 		root.getChildren().add(line);
@@ -425,7 +420,7 @@ public class revisionLog extends Application{
 		// Adds existing revisions from database on application startup
 		updateFields(root);
 		
-		buttons.addAll(btnAddaField, btnRevision, btnDate, btnDescription, btnCode, btnPrint, btnDNAPlot, btnHelp, btnSaveDraft);
+		buttons.addAll(btnAddaField, btnRevision, btnDate, btnDescription, btnCode, btnPrint, btnDNAPlot, btnHelp, btnSaveDraft, btnSaveRelease);
 		
 		for (int i = 0; i < buttons.size(); i++)
 			root.getChildren().add(buttons.get(i));
@@ -436,6 +431,7 @@ public class revisionLog extends Application{
 		 * Setting up the scene
 		 */
 		Scene scene = new Scene(root, screenWidth, screenHeight, Color.WHITE);
+		scene.getStylesheets().add("C:\\Users\\Minghua\\eclipse-workspace\\CTOS\\src\\fancytext.css");
 		window.setScene(scene);
 		window.setTitle("Revision Log");
 		
@@ -464,7 +460,6 @@ public class revisionLog extends Application{
 		int screenWidth=(int) primaryScreenBounds.getWidth();
 		int screenHeight = (int) primaryScreenBounds.getHeight();
 		double fieldWidthAlignment = screenWidth/10.5;
-		int proportionalWidth = screenWidth/16;
 		int proportionalHeight = screenHeight/10;
 		
 		if (numberOfFields < 8.5) {
@@ -680,10 +675,7 @@ public class revisionLog extends Application{
 			Statement stst = connection.createStatement();
 			ResultSet fullRevisionLog = stst.executeQuery(query1);
 			
-			
-			
-			
-			
+	
 			while(fullRevisionLog.next()) {
 				
 				numberOfFields += 0.4;
@@ -696,12 +688,10 @@ public class revisionLog extends Application{
 				System.out.format("%s, %s, %s, %s\n", revisionNum, dateCreated, description, code);
 				
 				
-				
 				Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 			    int screenWidth=(int) primaryScreenBounds.getWidth();
 			    int screenHeight = (int) primaryScreenBounds.getHeight();
 			    double fieldWidthAlignment = screenWidth/10.5;
-			    int proportionalWidth = screenWidth/16;
 			    int proportionalHeight = screenHeight/10;
 			    
 			    if (release == 0) {
@@ -751,38 +741,7 @@ public class revisionLog extends Application{
 				    txtCode.setLayoutX(fieldWidthAlignment*5);
 				    txtCode.setLayoutY(proportionalHeight*numberOfFields);
 				    txtCode.setStyle("-fx-background-color: #d4ffd4;");
-				    
-					Button btnSaveDraft = new Button();
-					btnSaveDraft.setText("Save as PDF");
-					btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
-					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-					
-					Button btnSaveRelease = new Button();
-					btnSaveRelease.setText("Release R" + StartAtOne);
-					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
-					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-					btnSaveRelease.setOnAction(e -> release());
-					
+
 				    StartAtOne +=1;
 				    
 				    labels.add(lblRevision);
@@ -794,7 +753,6 @@ public class revisionLog extends Application{
 				    	root.getChildren().addAll(textFieldsTemp.get(i));
 				    for (int i = 0; i < labelsTemp.size(); i++)
 				    	root.getChildren().add(labelsTemp.get(i));
-				    root.getChildren().addAll(btnSaveRelease, btnSaveDraft);
 				    
 				    textFieldsTemp.clear();
 				    labelsTemp.clear();
@@ -813,7 +771,6 @@ public class revisionLog extends Application{
 				    /**
 				     * Date Text field 1
 				     */
-			        
 			        Label lblDate = new Label();
 			        lblDate.setText(String.valueOf(dateCreated));
 			        lblDate.setAlignment(Pos.CENTER);
@@ -824,7 +781,6 @@ public class revisionLog extends Application{
 			        /**
 			         * Description Textfield 1
 			         * 			         */
-				    
 				    Label lblDescription = new Label();
 				    lblDescription.setText(description);
 				    lblDescription.setPrefWidth(260);
@@ -835,8 +791,9 @@ public class revisionLog extends Application{
 				    /**
 			         * 
 			         * Code TextField 1
-			         * 		         */
-				    
+			         * 		         	
+			         * 
+			         */
 				    Label lblCode = new Label();
 				    lblCode.setText(String.valueOf((code)));
 				    lblCode.setPrefWidth(100);
@@ -845,39 +802,7 @@ public class revisionLog extends Application{
 				    lblCode.setLayoutX(fieldWidthAlignment*5);
 				    lblCode.setLayoutY(proportionalHeight*numberOfFields);
 				    lblCode.setStyle("-fx-background-color: #DCDCDC; -fx-padding: 5 10 5 10;");
-					
-					Button btnSaveDraft = new Button();
-					btnSaveDraft.setText("Save as PDF");
-					btnSaveDraft.setLayoutX(fieldWidthAlignment*6);
-					btnSaveDraft.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveDraft.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#FFDAB9, #FFDAB9),\r\n" + 
-							"        linear-gradient(#FFDAB9 0%, #FFDAB9 49%, #FFDAB9 50%, #FFDAB9 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-	
-					
-					Button btnSaveRelease = new Button();
-					btnSaveRelease.setText("Release R" + StartAtOne);
-					btnSaveRelease.setLayoutX(fieldWidthAlignment*7);
-					btnSaveRelease.setLayoutY(proportionalHeight*numberOfFields);
-					btnSaveRelease.setStyle(" -fx-background-color: \r\n" + 
-							"        #000000,\r\n" + 
-							"        linear-gradient(#DCDCDC, #DCDCDC),\r\n" + 
-							"        linear-gradient(#DCDCDC 0%, #DCDCDC 49%, #DCDCDC 50%, #DCDCDC 100%);\r\n" + 
-							"    -fx-background-insets: 0,1,2;\r\n" + 
-							"    -fx-background-radius: 3,2,1;\r\n" + 
-							"    -fx-padding: 5 10 5 10;\r\n" + 
-							"    -fx-text-fill: black;\r\n" + 
-							"    -fx-font-size: 12px; \r\n" + 
-							"    -fx-font-weight: bold;");
-					
-				    
+
 				    StartAtOne +=1;
 				    
 				    labels.addAll(lblRevision, lblDate, lblDescription, lblCode);
@@ -885,15 +810,12 @@ public class revisionLog extends Application{
 				    for (int i = 0; i < labelsTemp.size(); i++)
 				    	root.getChildren().addAll(labelsTemp.get(i));
 				    labelsTemp.clear();
-				    root.getChildren().addAll(btnSaveRelease, btnSaveDraft);
-			    	
-			    	
+			    				    	
 			    	
 			    }
 			    /**
 			    * Revision textField 1
 			    */
-				
 			}
 			
 		} catch(Exception e) {
