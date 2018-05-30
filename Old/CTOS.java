@@ -5,17 +5,10 @@
  */
 package ctos;
 
-import static ctos.RevisionLog.group;
-import java.util.ArrayList;
+
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -32,10 +25,10 @@ public class CTOS extends Application {
      
     Stage window;
     static Group group;
- //   @Override
+    @Override
     public void start(Stage stage) throws Exception {
 		
-	RevisionLog.createScreen(stage);
+	RevisionLog.revisionLogScene(stage);
         
         RevisionLog.scene.getStylesheets().add(getClass().getResource("ctos.css").toExternalForm());
 		

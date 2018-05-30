@@ -7,14 +7,13 @@ import javafx.scene.control.TextField;
 
 public class TextfieldClass {
     
-
     public static ArrayList<TextField> revisionLogTextFields(){
 
-        int screenWidth = ScreenResolution.resolutionWidth();
-        int screenHeight = ScreenResolution.resolutionHeight();
-        int fieldWidthAlignment = (int) ScreenResolution.fieldWidthAlignment(screenWidth);
-        int proportionalHeight = ScreenResolution.propotionalHeight(screenHeight);
-        double proportionalWidth = ScreenResolution.proportionalWidth(screenWidth);
+        int screenWidth = ScreenResolutionClass.resolutionWidth();
+        int screenHeight = ScreenResolutionClass.resolutionHeight();
+        int fieldWidthAlignment = (int) ScreenResolutionClass.fieldWidthAlignment(screenWidth);
+        int proportionalHeight = ScreenResolutionClass.propotionalHeight(screenHeight);
+        double proportionalWidth = ScreenResolutionClass.proportionalWidth(screenWidth);
         double numberOfFields = 2.1;
         
         ArrayList<TextField> textfields = new ArrayList<>();
