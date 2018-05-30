@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ctos;
+package DSP;
 
+import DSP.LabelClass;
+import DSP.ScreenResolutionClass;
 import java.util.ArrayList;
 import javafx.scene.control.Label;
 

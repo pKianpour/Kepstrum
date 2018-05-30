@@ -1,5 +1,5 @@
 
-package ctos;
+package DSP;
 
 import javafx.scene.control.Label;
 import java.util.ArrayList;

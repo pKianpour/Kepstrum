@@ -1,6 +1,7 @@
 
-package ctos;
+package DSP;
 
+import DSP.BorderClass;
 import java.util.ArrayList;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
