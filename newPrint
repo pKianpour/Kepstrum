@@ -1,0 +1,80 @@
+package DSP;
+
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.PrintResolution;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.transform.Scale;
+import javafx.stage.Modality;
+
+/**
+ * 
+ * This function takes the current scene from the user and prints it 
+ * The user can decide which printer and paper to use to print the page
+ * @author Aaron and Nic
+ */
+public class Print {
+    
+    static Scale scale;
+	/**
+         * Uses Java libraries to setup the printer page and to print
+         * @param node Is the current page to print.
+         */
+	public static void pageSetup(Node node) { //Brings up the printing settings
+
+            Printer printer = Printer.getDefaultPrinter();
+            PageLayout pageLayout = printer.createPageLayout(Paper.C, PageOrientation.LANDSCAPE, Printer.MarginType.HARDWARE_MINIMUM);//Printer.MarginType.DEFAUL
+            
+           // double scaleX = pageLayout.getPrintableWidth() / node.getBoundsInParent().getWidth();
+            //double scaleY = pageLayout.getPrintableHeight() / node.getBoundsInParent().getHeight();
+            double scaleX = 1728.0 / node.getBoundsInParent().getWidth();
+            double scaleY = 1152.0 / node.getBoundsInParent().getHeight();
+            System.out.println("Width: " + pageLayout.getPrintableWidth() + "--Height:" + pageLayout.getPrintableHeight());
+            System.out.println("ScaleX :" + scaleX + "ScaleY: " + scaleY);
+            
+            scale = new Scale(scaleX, scaleY);
+            //scale = new Scale(1728.0, 1152.0);
+            
+            node.getTransforms().add(scale);
+
+
+            //Create a printer job for the default printer
+            PrinterJob job = PrinterJob.createPrinterJob();
+            if (job == null)
+                    return;		
+            boolean proceed = job.showPrintDialog(null);
+
+            if (proceed)
+                    print(job, node);
+            node.getTransforms().remove(scale);
+		
+	} // end pageSetup
+	
+        /**
+         * Prints the page.
+         * @param job The printer job that gets created.
+         * @param node The page to print
+         */
+	private static void print(PrinterJob job, Node node) { //Prints the page
+
+		boolean printed = job.printPage(node);
+
+		if (printed)
+			job.endJob(); //End the printer job
+		else { //Printing Error
+			Alert printerError = new Alert(AlertType.ERROR);
+			printerError.setTitle("Error");
+			printerError.setHeaderText("Printing Error");
+			printerError.setContentText("Uh oh! That's not supposed to happen!");
+			printerError.initModality(Modality.APPLICATION_MODAL);
+			printerError.showAndWait();
+		}
+                
+	}// end print
+}
+
